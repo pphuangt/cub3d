@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pphuangt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 13:29:35 by pphuangt          #+#    #+#             */
-/*   Updated: 2025/05/05 13:29:37 by pphuangt         ###   ########.fr       */
+/*   Created: 2025/05/05 15:04:31 by pphuangt          #+#    #+#             */
+/*   Updated: 2025/05/05 15:04:33 by pphuangt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "cub3d.h"
 
-# include <errno.h>
-# include <stdio.h>
-# include <string.h>
-# include <X11/X.h>
-# include "mlx.h"
-# include "libft.h"
-
-typedef enum s_keys
+void	error_exit(char *message, int code)
 {
-	ESCAPE = 0xFF1B,
-}	t_keys;
-
-typedef struct s_mlx
-{
-	void	*ptr;
-	void	*win;
-}	t_mlx;
-
-void	error_exit(char *message, int code);
-
-#endif
+	ft_putendl_fd("Error", STDERR_FILENO);
+	ft_putstr_fd(message, STDERR_FILENO);
+	if (code > 0)
+	{
+		ft_putstr_fd(": ", STDERR_FILENO);
+		ft_putendl_fd(strerror(code), STDERR_FILENO);
+	}
+	exit(1);
+}

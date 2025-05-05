@@ -8,7 +8,7 @@ LIBFT = ./libs/libft
 HEADERS = -I./$(INCLUDE) -I$(LIBMLX) -I$(LIBFT)
 LIBS = $(LIBFT)/libft.a $(LIBMLX)/libmlx.a -L$(LIBMLX) -lmlx -lXext -lX11 -lm
 SRCS_DIR = ./srcs
-SRCS = $(addprefix $(SRCS_DIR)/, main.c)
+SRCS = $(addprefix $(SRCS_DIR)/, main.c errors.c)
 OBJS = $(SRCS:.c=.o)
 
 all : $(NAME)
