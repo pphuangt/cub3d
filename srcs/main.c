@@ -12,41 +12,65 @@
 
 #include "cub3d.h"
 
-int	exit_hook(t_mlx *mlx)
+#define WIDTH 512
+#define HEIGHT 512
+
+static mlx_image_t* image;
+
+int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
-	mlx_clear_window(mlx->ptr, mlx->win);
-	mlx_destroy_window(mlx->ptr, mlx->win);
-	mlx_loop_end(mlx->ptr);
-	return (0);
+    return (r << 24 | g << 16 | b << 8 | a);
 }
 
-int	key_hook(int key, t_mlx *mlx)
+void ft_hook(void* param)
 {
-	if (key == ESCAPE)
-		exit_hook(mlx);
-	return (0);
+	mlx_t* mlx = param;
+
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(mlx);
+	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+		image->instances[0].y -= 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+		image->instances[0].y += 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+		image->instances[0].x -= 5;
+	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+		image->instances[0].x += 5;
 }
 
-int	main(void)
+int32_t main(void)
 {
-	t_mlx	mlx;
-	int		errsv;
+	mlx_t* mlx;
 
-	mlx.ptr = mlx_init();
-	if (!mlx.ptr)
-		error_exit("mlx init", errno);
-	mlx.win = mlx_new_window(mlx.ptr, 400, 400, "cub3d");
-	if (!mlx.win)
+	// Gotta error check this stuff
+	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
-		errsv = errno;
-		mlx_destroy_display(mlx.ptr);
-		error_exit("mlx new window", errsv);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
 	}
-	mlx_hook(mlx.win, DestroyNotify,
-		Button1MotionMask, exit_hook, &mlx);
-	mlx_hook(mlx.win, KeyRelease, KeyReleaseMask, key_hook, &mlx);
-	mlx_loop(mlx.ptr);
-	mlx_destroy_display(mlx.ptr);
-	free(mlx.ptr);
-	return (0);
+	if (!(image = mlx_new_image(mlx, 128, 128)))
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return(EXIT_FAILURE);
+	}
+	
+	for (uint32_t i = 0; i < image->width; ++i)
+	{
+	for (uint32_t y = 0; y < image->height; ++y)
+		{
+			mlx_put_pixel(image, i, y, ft_pixel(0, 0, 0, 255));
+		}
+	}
+	mlx_loop_hook(mlx, ft_hook, mlx);
+
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
+	return (EXIT_SUCCESS);
 }

@@ -1,34 +1,49 @@
 NAME = cub3d
-INCLUDE = includes
+INCLUDE = include
+LIB = lib
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -O3
-FSANITIZE := -fsanitize=address
-LIBMLX = ./libs/minilibx-linux
-LIBFT = ./libs/libft
-HEADERS = -I./$(INCLUDE) -I$(LIBMLX) -I$(LIBFT)
-LIBS = $(LIBFT)/libft.a $(LIBMLX)/libmlx.a -L$(LIBMLX) -lmlx -lXext -lX11 -lm
+CFLAGS = -Wall -Wextra -Werror
+
+LIBMLX = ./$(LIB)/MLX42
+LIBFT = ./$(LIB)/libft
+
+HEADERS = -I./$(INCLUDE) -I$(LIBMLX)/$(INCLUDE) -I$(LIBFT)
+LIBS = $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L$(LIBMLX)
+
 SRCS_DIR = ./srcs
 SRCS = $(addprefix $(SRCS_DIR)/, main.c errors.c)
 OBJS = $(SRCS:.c=.o)
 
-all : $(NAME)
+UNAME := $(shell uname)
+ifeq ($(UNAME), Linux)
+	OS_FLAGS = -ldl -lglfw -pthread -lm
+endif
+ifeq ($(UNAME), Darwin)
+	OS_FLAGS = -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+endif
+
+all : libmlx $(NAME)
+
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && $(MAKE) -C $(LIBMLX)/build -j4
 
 $(NAME) : $(OBJS)
 	$(MAKE) -C $(LIBFT)
-	$(MAKE) -C $(LIBMLX)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) $(HEADERS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) $(OS_FLAGS) $(HEADERS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $(HEADERS) -o $@ $<
 
 clean:
 	$(MAKE) clean -C $(LIBFT)
-	$(MAKE) clean -C $(LIBMLX)
-	rm -rf $(OBJS)
+	@rm -rf $(LIBMLX)/build
+	@rm -rf $(OBJS)
 
 fclean: clean
 	$(MAKE) clean -C $(LIBFT)
-	rm -f $(LIBFT)/libft.a
-	rm -f $(NAME)
+	@rm -f $(LIBFT)/libft.a
+	@rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re libmlx

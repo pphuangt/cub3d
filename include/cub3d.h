@@ -14,10 +14,12 @@
 # define CUB3D_H
 
 # include <errno.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <string.h>
-# include <X11/X.h>
-# include "mlx.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include "MLX42/MLX42.h"
 # include "libft.h"
 
 typedef enum s_keys
