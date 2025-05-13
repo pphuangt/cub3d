@@ -12,65 +12,29 @@
 
 #include "cub3d.h"
 
-#define WIDTH 512
-#define HEIGHT 512
-
-static mlx_image_t* image;
-
-int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
+void	setup(t_game *game)
 {
-    return (r << 24 | g << 16 | b << 8 | a);
+	t_graphic	*graphic;
+
+	graphic = &game->graphic;
+	graphic->window = mlx_init(WIDTH, HEIGHT, TITLE, false);
+	if (!graphic->window)
+		ft_error(game);
+	mlx_key_hook(graphic->window, esc_exit, game);
+	mlx_close_hook(graphic->window, close_hook, game);
 }
 
-void ft_hook(void* param)
+void	render(t_game *game)
 {
-	mlx_t* mlx = param;
-
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		image->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		image->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		image->instances[0].x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		image->instances[0].x += 5;
+	mlx_loop(game->graphic.window);
+	mlx_terminate(game->graphic.window);
 }
 
-int32_t main(void)
+int32_t	main(void)
 {
-	mlx_t* mlx;
+	t_game	game;
 
-	// Gotta error check this stuff
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
-	{
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (!(image = mlx_new_image(mlx, 128, 128)))
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	
-	for (uint32_t i = 0; i < image->width; ++i)
-	{
-	for (uint32_t y = 0; y < image->height; ++y)
-		{
-			mlx_put_pixel(image, i, y, ft_pixel(0, 0, 0, 255));
-		}
-	}
-	mlx_loop_hook(mlx, ft_hook, mlx);
-
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	setup(&game);
+	render(&game);
 	return (EXIT_SUCCESS);
 }

@@ -22,17 +22,31 @@
 # include "MLX42/MLX42.h"
 # include "libft.h"
 
+# define WIDTH 512
+# define HEIGHT 512
+# define TITLE "cub3d"
+
 typedef enum s_keys
 {
 	ESCAPE = 0xFF1B,
 }	t_keys;
 
-typedef struct s_mlx
+typedef struct s_graphic
 {
-	void	*ptr;
-	void	*win;
-}	t_mlx;
+	mlx_t		*window;
+	mlx_image_t	*img;
+}	t_graphic;
 
-void	error_exit(char *message, int code);
+typedef struct s_game
+{
+	t_graphic	graphic;
+}	t_game;
+
+void	esc_exit(mlx_key_data_t keydata, void *param);
+void	close_hook(void *param);
+
+void	ft_error(t_game *game);
+
+void	game_terminate(t_game *game);
 
 #endif
