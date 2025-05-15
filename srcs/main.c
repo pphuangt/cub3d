@@ -17,15 +17,17 @@ void	setup(t_game *game)
 	t_graphic	*graphic;
 
 	graphic = &game->graphic;
-	graphic->window = mlx_init(WIDTH, HEIGHT, TITLE, false);
+	graphic->window = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, TITLE, false);
 	if (!graphic->window)
 		ft_error(game);
+	set_map(game);
 	mlx_key_hook(graphic->window, esc_exit, game);
 	mlx_close_hook(graphic->window, close_hook, game);
 }
 
 void	render(t_game *game)
 {
+	render_map(game);
 	mlx_loop(game->graphic.window);
 	mlx_terminate(game->graphic.window);
 }
