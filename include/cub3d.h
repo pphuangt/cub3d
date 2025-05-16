@@ -22,8 +22,8 @@
 # include "MLX42/MLX42.h"
 # include "libft.h"
 
-# define WINDOW_WIDTH 512
-# define WINDOW_HEIGHT 512
+# define WINDOW_WIDTH 600
+# define WINDOW_HEIGHT 400
 # define TITLE "cub3d"
 
 typedef enum s_keys
