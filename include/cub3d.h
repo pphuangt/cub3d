@@ -22,8 +22,6 @@
 # include "MLX42/MLX42.h"
 # include "libft.h"
 
-# define WINDOW_WIDTH 600
-# define WINDOW_HEIGHT 400
 # define TITLE "cub3d"
 
 typedef enum s_keys
@@ -34,26 +32,17 @@ typedef enum s_keys
 typedef struct s_graphic
 {
 	mlx_t		*window;
+	int32_t		width;
+	int32_t		height;
 }	t_graphic;
-
-typedef struct s_map
-{
-	mlx_image_t	*img;
-	int			row;
-	int			col;
-	int			tile_x;
-	int			tile_y;
-	int			wall[100][100];
-}	t_map;
 
 typedef struct s_game
 {
 	t_graphic	graphic;
-	t_map		map;
 }	t_game;
 
-void	set_map(t_game *game);
-void	render_map(t_game *game);
+void    setup_map(t_game *game);
+void    render_map(t_game *game);
 
 void	esc_exit(mlx_key_data_t keydata, void *param);
 void	close_hook(void *param);

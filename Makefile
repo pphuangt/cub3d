@@ -11,7 +11,7 @@ HEADERS = -I./$(INCLUDE) -I$(LIBMLX)/$(INCLUDE) -I$(LIBFT)
 LIBS = $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L$(LIBMLX)
 
 SRCS_DIR = ./srcs
-SRCS = $(addprefix $(SRCS_DIR)/, main.c error.c hook.c utils.c map.c)
+SRCS = $(addprefix $(SRCS_DIR)/, main.c hook.c utils.c map.c)
 OBJS = $(SRCS:.c=.o)
 
 UNAME := $(shell uname)
@@ -36,12 +36,12 @@ $(NAME) : $(OBJS)
 
 clean:
 	$(MAKE) clean -C $(LIBFT)
-	@rm -rf $(LIBMLX)/build
 	@rm -rf $(OBJS)
 
 fclean: clean
 	$(MAKE) clean -C $(LIBFT)
 	@rm -f $(LIBFT)/libft.a
+	@rm -rf $(LIBMLX)/build
 	@rm -f $(NAME)
 
 re: fclean all
