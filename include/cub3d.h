@@ -43,6 +43,8 @@ typedef struct s_game
 
 void    setup_map(t_game *game);
 void    render_map(t_game *game);
+void    setup_player(t_game *game);
+void    render_player(t_game *game);
 
 void	esc_exit(mlx_key_data_t keydata, void *param);
 void	close_hook(void *param);
