@@ -21,6 +21,8 @@
 # include <unistd.h>
 # include "MLX42/MLX42.h"
 # include "libft.h"
+# include <math.h>
+# include "constants.h"
 
 # define TITLE "cub3d"
 

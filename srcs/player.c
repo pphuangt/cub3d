@@ -1,13 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pphuangt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/17 11:09:44 by pphuangt          #+#    #+#             */
+/*   Updated: 2025/05/17 11:09:46 by pphuangt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
-#define COL 15
-#define ROW 12
-#define TILE_X 32
-#define TILE_Y 32
-#define POS_X ((TILE_X * COL + 1) / 2)
-#define POS_Y ((TILE_Y * ROW + 1) / 2)
-#define RADIUS 8
-#define RED 0xFF0000FF
-#include <math.h>
 
 void	setup_player(t_game	*game)
 {
@@ -46,7 +49,7 @@ void	render_player(t_game *game)
 	if (img == NULL)
 		ft_error(game);
 	draw_player(img);
-	if (mlx_image_to_window(graphic->window, img, POS_X - RADIUS, POS_Y - RADIUS)
+	if (mlx_image_to_window(graphic->window, img, POSX - RADIUS, POSY - RADIUS)
 		== -1)
 		ft_error(game);
 }
