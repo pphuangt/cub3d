@@ -17,63 +17,71 @@ void	setup_player(t_game	*game)
 	(void) game;
 }
 
-/*
-void	draw_player(mlx_image_t *img)
+void	circle(mlx_image_t *img, uint32_t center_x, uint32_t center_y)
 {
 	uint32_t	x;
 	uint32_t	y;
-	uint32_t	ex;
-	uint32_t	ey;
-	double		center;
+	uint32_t	radius_squared;
 
-	y = POSY * TILEY - TILEY / 2 - RADIUS;
-	ex = POSX * TILEX - TILEX / 2 + RADIUS;
-	ey = POSY * TILEY - TILEY / 2 + RADIUS;
-	center = RADIUS - 0.5f;
-	while (y < ey)
+	radius_squared = RADIUS * RADIUS;
+	y = center_y - RADIUS;
+	while (y <= center_y + RADIUS)
 	{
-		x = POSX * TILEX - TILEX / 2 - RADIUS;
-		while (x < ex)
+		x = center_x - RADIUS;
+		while (x <= center_x + RADIUS)
 		{
-			if ((x - center) * (x - center) + (y - center) * (y - center)
-				<= (RADIUS * RADIUS))
+			if ((x - center_x) * (x - center_x)
+				+ (y - center_y) * (y - center_y)
+				<= radius_squared)
 				mlx_put_pixel(img, x, y, RED);
 			x++;
 		}
 		y++;
 	}
 }
-*/
+
+void	line(mlx_image_t *img, uint32_t start_x, uint32_t start_y, uint32_t end_x, uint32_t end_y)
+{
+	int	dx = abs((int)end_x - (int)start_x);
+    int	dy = -abs((int)end_y - (int)start_y);
+    int	sx = start_x < end_x ? 1 : -1;
+    int	sy = start_y < end_y ? 1 : -1;
+    int	err = dx + dy;
+    int	e2;
+    
+    while (1)
+    {
+        mlx_put_pixel(img, start_x, start_y, YELLOW);
+        if (start_x == end_x && start_y == end_y)
+            break;
+        e2 = 2 * err;
+        if (e2 >= dy)
+        {
+            if (start_x == end_x)
+                break;
+            err += dy;
+            start_x += sx;
+        }
+        if (e2 <= dx)
+        {
+            if (start_y == end_y)
+                break;
+            err += dx;
+            start_y += sy;
+        }
+    }
+}
 
 void	draw_player(mlx_image_t *img)
 {
-	uint32_t	x;
-	uint32_t	y;
-	uint32_t	start_x;
-	uint32_t	start_y;
-	uint32_t	end_x;
-	uint32_t	end_y;
-	uint32_t	center_x;
-	uint32_t	center_y;
-
-	center_x = POSX * TILEX - (TILEX / 2);
-	center_y = POSY * TILEY - (TILEY / 2);
-	start_x = center_x - RADIUS;
-	start_y = center_y - RADIUS;
-	end_x = center_x + RADIUS;
-	end_y = center_y + RADIUS;
-	y = start_y;
-	while (y <= end_y)
-	{
-		x = start_x;
-		while (x <= end_x)
-		{
-			if ((x - center_x) * (x - center_x) + (y - center_y) * (y - center_y) <= (RADIUS * RADIUS))
-				mlx_put_pixel(img, x, y, RED);
-			x++;
-		}
-		y++;
-	}
+	circle(img,
+		POSX * TILEX - (TILEX / 2),
+		POSY * TILEY - (TILEY / 2));
+	line(img,
+		POSX * TILEX - (TILEX / 2),
+		POSY * TILEY - (TILEY / 2),
+		POSX * TILEX - (TILEX / 2),
+		ROW * TILEX);
 }
 
 void	render_player(t_game *game)
