@@ -15,10 +15,10 @@
 int	wall[ROW][COL] = {
 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+{1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -49,7 +49,7 @@ void	draw_map(mlx_image_t *img)
 		while (col < img->width)
 		{
 			if (wall[row / TILEY][col / TILEX] != 0)
-				mlx_put_pixel(img, col, row, 120);
+				mlx_put_pixel(img, col, row, GREY);
 			col++;
 		}
 		row++;
@@ -59,13 +59,7 @@ void	draw_map(mlx_image_t *img)
 void	render_map(t_game *game)
 {
 	t_graphic	*graphic;
-	mlx_image_t	*img;
 
 	graphic = &game->graphic;
-	img = mlx_new_image(graphic->window, graphic->width, graphic->height);
-	if (img == NULL)
-		ft_error(game);
-	draw_map(img);
-	if (mlx_image_to_window(graphic->window, img, 0, 0) == -1)
-		ft_error(game);
+	draw_map(graphic->img);
 }

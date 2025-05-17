@@ -17,21 +17,58 @@ void	setup_player(t_game	*game)
 	(void) game;
 }
 
+/*
 void	draw_player(mlx_image_t *img)
 {
 	uint32_t	x;
 	uint32_t	y;
+	uint32_t	ex;
+	uint32_t	ey;
 	double		center;
 
+	y = POSY * TILEY - TILEY / 2 - RADIUS;
+	ex = POSX * TILEX - TILEX / 2 + RADIUS;
+	ey = POSY * TILEY - TILEY / 2 + RADIUS;
 	center = RADIUS - 0.5f;
-	y = 0;
-	while (y < img->height)
+	while (y < ey)
 	{
-		x = 0;
-		while (x < img->width)
+		x = POSX * TILEX - TILEX / 2 - RADIUS;
+		while (x < ex)
 		{
 			if ((x - center) * (x - center) + (y - center) * (y - center)
 				<= (RADIUS * RADIUS))
+				mlx_put_pixel(img, x, y, RED);
+			x++;
+		}
+		y++;
+	}
+}
+*/
+
+void	draw_player(mlx_image_t *img)
+{
+	uint32_t	x;
+	uint32_t	y;
+	uint32_t	start_x;
+	uint32_t	start_y;
+	uint32_t	end_x;
+	uint32_t	end_y;
+	uint32_t	center_x;
+	uint32_t	center_y;
+
+	center_x = POSX * TILEX - (TILEX / 2);
+	center_y = POSY * TILEY - (TILEY / 2);
+	start_x = center_x - RADIUS;
+	start_y = center_y - RADIUS;
+	end_x = center_x + RADIUS;
+	end_y = center_y + RADIUS;
+	y = start_y;
+	while (y <= end_y)
+	{
+		x = start_x;
+		while (x <= end_x)
+		{
+			if ((x - center_x) * (x - center_x) + (y - center_y) * (y - center_y) <= (RADIUS * RADIUS))
 				mlx_put_pixel(img, x, y, RED);
 			x++;
 		}
@@ -42,14 +79,7 @@ void	draw_player(mlx_image_t *img)
 void	render_player(t_game *game)
 {
 	t_graphic	*graphic;
-	mlx_image_t	*img;
 
 	graphic = &game->graphic;
-	img = mlx_new_image(graphic->window, RADIUS * 2, RADIUS * 2);
-	if (img == NULL)
-		ft_error(game);
-	draw_player(img);
-	if (mlx_image_to_window(graphic->window, img, POSX - RADIUS, POSY - RADIUS)
-		== -1)
-		ft_error(game);
+	draw_player(graphic->img);
 }

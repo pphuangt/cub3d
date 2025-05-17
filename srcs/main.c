@@ -30,16 +30,26 @@ void	setup(t_game *game)
 	graphic->window = mlx_init(graphic->width, graphic->height, TITLE, false);
 	if (!graphic->window)
 		ft_error(game);
+	graphic->img = mlx_new_image(
+			graphic->window,
+			graphic->width,
+			graphic->height);
+	if (!graphic->img)
+		ft_error(game);
 	mlx_key_hook(graphic->window, esc_exit, game);
 	mlx_close_hook(graphic->window, close_hook, game);
 }
 
 void	render(t_game *game)
 {
+	t_graphic	*graphic;
+
+	graphic = &game->graphic;
 	render_map(game);
 	render_player(game);
-	mlx_loop(game->graphic.window);
-	mlx_terminate(game->graphic.window);
+	mlx_image_to_window(graphic->window, graphic->img, 0, 0);
+	mlx_loop(graphic->window);
+	mlx_terminate(graphic->window);
 }
 
 int32_t	main(void)

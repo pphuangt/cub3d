@@ -34,6 +34,7 @@ typedef enum s_keys
 typedef struct s_graphic
 {
 	mlx_t		*window;
+	mlx_image_t	*img;
 	int32_t		width;
 	int32_t		height;
 }	t_graphic;
