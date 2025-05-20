@@ -6,12 +6,13 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIBMLX = ./$(LIB)/MLX42
 LIBFT = ./$(LIB)/libft
+PRINTF = ./$(LIB)/ft_printf
 
-HEADERS = -I./$(INCLUDE) -I$(LIBMLX)/$(INCLUDE) -I$(LIBFT)
+HEADERS = -I./$(INCLUDE) -I$(LIBMLX)/$(INCLUDE) -I$(LIBFT) -I$(PRINTF)
 LIBS = $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L$(LIBMLX)
 
 SRCS_DIR = ./srcs
-SRCS = $(addprefix $(SRCS_DIR)/, main.c hook.c utils.c map.c player.c)
+SRCS = $(addprefix $(SRCS_DIR)/, main.c hook.c utils.c map.c player.c parse.c)
 OBJS = $(SRCS:.c=.o)
 
 UNAME := $(shell uname)

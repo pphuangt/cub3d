@@ -36,11 +36,34 @@ void	setup_map(t_game *game)
 	graphic->width = TILEX * COL;
 }
 
-void	draw_map(mlx_image_t *img)
+//---original draw_map function---
+// void	draw_map(mlx_image_t *img)
+// {
+// 	uint32_t	row;
+// 	uint32_t	col;
+
+// 	memset(img->pixels, 255, img->width * img->height * sizeof(uint32_t));
+// 	row = 0;
+// 	while (row < img->height)
+// 	{
+// 		col = 0;
+// 		while (col < img->width)
+// 		{
+// 			if (wall[row / TILEY][col / TILEX] != 0)
+// 				mlx_put_pixel(img, col, row, GREY);
+// 			col++;
+// 		}
+// 		row++;
+// 	}
+// }
+
+void	draw_map(t_game *game)
 {
 	uint32_t	row;
 	uint32_t	col;
 
+	t_graphic	*graphic = &game->graphic;
+	mlx_image_t	*img = graphic->img;
 	memset(img->pixels, 255, img->width * img->height * sizeof(uint32_t));
 	row = 0;
 	while (row < img->height)
@@ -48,7 +71,7 @@ void	draw_map(mlx_image_t *img)
 		col = 0;
 		while (col < img->width)
 		{
-			if (wall[row / TILEY][col / TILEX] != 0)
+			if (game->map_data[row / TILEY][col / TILEX] != 0)
 				mlx_put_pixel(img, col, row, GREY);
 			col++;
 		}
@@ -56,10 +79,16 @@ void	draw_map(mlx_image_t *img)
 	}
 }
 
+// -- original render_map function ---
+// void	render_map(t_game *game)
+// {
+// 	t_graphic	*graphic;
+
+// 	graphic = &game->graphic;
+// 	draw_map(graphic->img);
+// }
+
 void	render_map(t_game *game)
 {
-	t_graphic	*graphic;
-
-	graphic = &game->graphic;
-	draw_map(graphic->img);
+	draw_map(game);
 }

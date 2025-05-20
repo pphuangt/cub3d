@@ -23,6 +23,7 @@
 # include "libft.h"
 # include <math.h>
 # include "constants.h"
+# include "fcntl.h"
 
 # define TITLE "cub3d"
 
@@ -42,8 +43,10 @@ typedef struct s_graphic
 typedef struct s_game
 {
 	t_graphic	graphic;
+	int			**map_data;
 }	t_game;
 
+void	parse_map_file(char *in_file, t_game *game);
 void    setup_map(t_game *game);
 void    render_map(t_game *game);
 void    setup_player(t_game *game);

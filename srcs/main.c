@@ -52,10 +52,16 @@ void	render(t_game *game)
 	mlx_terminate(graphic->window);
 }
 
-int32_t	main(void)
+int32_t	main(int ac, char **av)
 {
 	t_game	game;
 
+	if (ac != 2)
+	{
+		ft_putendl_fd("Error\nUsage: ./cub3d <map.cub>", STDERR_FILENO);
+		return (EXIT_FAILURE);
+	}
+	parse_map_file(av[1], &game);
 	setup(&game);
 	render(&game);
 	return (EXIT_SUCCESS);
