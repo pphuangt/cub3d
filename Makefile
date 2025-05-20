@@ -18,8 +18,14 @@ UNAME := $(shell uname)
 ifeq ($(UNAME), Linux)
 	OS_FLAGS = -ldl -lglfw -pthread -lm
 endif
+
+# ----Original version----
+# ifeq ($(UNAME), Darwin)
+# 	OS_FLAGS = -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+
+# --Hong Macbook version--
 ifeq ($(UNAME), Darwin)
-	OS_FLAGS = -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+	OS_FLAGS = -L/usr/local/Cellar/glfw/3.4/lib -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 endif
 
 all : libmlx $(NAME)
