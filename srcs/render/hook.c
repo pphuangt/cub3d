@@ -12,19 +12,31 @@
 
 #include "cub3d.h"
 
-void	close_hook(void *param)
+static void	close_hook(void *param);
+static void	esc_exit(mlx_key_data_t keydata, void *param);
+
+void	setup_hook(t_game *game)
+{
+	t_graphic	*graphic;
+
+	graphic = &game->graphic;
+	mlx_key_hook(graphic->window, esc_exit, game);
+	mlx_close_hook(graphic->window, close_hook, game);
+}
+
+static void	close_hook(void *param)
 {
 	t_game	*game;
 
 	game = (t_game *)param;
-	game_terminate(game);
+	terminate(game);
 }
 
-void	esc_exit(mlx_key_data_t keydata, void *param)
+static void	esc_exit(mlx_key_data_t keydata, void *param)
 {
 	t_game	*game;
 
 	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_ESCAPE)
-		close_hook(game);
+		terminate(game);
 }

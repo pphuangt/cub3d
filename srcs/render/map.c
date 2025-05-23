@@ -12,13 +12,15 @@
 
 #include "cub3d.h"
 
+static void	draw_map(mlx_image_t *img);
+
 int	wall[ROW][COL] = {
 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -36,7 +38,15 @@ void	setup_map(t_game *game)
 	graphic->width = TILEX * COL;
 }
 
-void	draw_map(mlx_image_t *img)
+void	render_map(t_game *game)
+{
+	t_graphic	*graphic;
+
+	graphic = &game->graphic;
+	draw_map(graphic->img[0]);
+}
+
+static void	draw_map(mlx_image_t *img)
 {
 	uint32_t	row;
 	uint32_t	col;
@@ -54,12 +64,4 @@ void	draw_map(mlx_image_t *img)
 		}
 		row++;
 	}
-}
-
-void	render_map(t_game *game)
-{
-	t_graphic	*graphic;
-
-	graphic = &game->graphic;
-	draw_map(graphic->img);
 }

@@ -11,7 +11,8 @@ HEADERS = -I./$(INCLUDE) -I$(LIBMLX)/$(INCLUDE) -I$(LIBFT)
 LIBS = $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L$(LIBMLX)
 
 SRCS_DIR = ./srcs
-SRCS = $(addprefix $(SRCS_DIR)/, main.c hook.c utils.c map.c player.c)
+RENDER_DIR = $(SRCS_DIR)/render
+SRCS = $(addprefix $(RENDER_DIR)/, main.c hook.c map.c player.c graphic.c)
 OBJS = $(SRCS:.c=.o)
 
 UNAME := $(shell uname)
