@@ -19,9 +19,10 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 # include "MLX42/MLX42.h"
 # include "libft.h"
-# include <math.h>
+# include "draw.h"
 # include "constants.h"
 
 # define TITLE "cub3d"
@@ -38,11 +39,6 @@ typedef struct s_graphic
 	int32_t		width;
 	int32_t		height;
 }	t_graphic;
-
-typedef struct s_renderer
-{
-	void	(*rect)(uint32_t x, uint32_t y, uint32_t w, uint32_t h);
-}	t_renderer;
 
 typedef struct s_game
 {

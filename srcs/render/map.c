@@ -12,9 +12,7 @@
 
 #include "cub3d.h"
 
-static void	draw_map(mlx_image_t *img);
-
-int	wall[ROW][COL] = {
+int	g_wall[ROW][COL] = {
 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -40,28 +38,5 @@ void	setup_map(t_game *game)
 
 void	render_map(t_game *game)
 {
-	t_graphic	*graphic;
-
-	graphic = &game->graphic;
-	draw_map(graphic->img[0]);
-}
-
-static void	draw_map(mlx_image_t *img)
-{
-	uint32_t	row;
-	uint32_t	col;
-
-	memset(img->pixels, 255, img->width * img->height * sizeof(uint32_t));
-	row = 0;
-	while (row < img->height)
-	{
-		col = 0;
-		while (col < img->width)
-		{
-			if (wall[row / TILEY][col / TILEX] != 0)
-				mlx_put_pixel(img, col, row, GREY);
-			col++;
-		}
-		row++;
-	}
+	(void)game;
 }

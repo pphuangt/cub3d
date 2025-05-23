@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../lib/MLX42/include/MLX42/MLX42.h"
 #include "cub3d.h"
 
 static void	setup(t_game *game);
@@ -38,6 +37,7 @@ static void	setup(t_game *game)
 	setup_map(game);
 	setup_player(game);
 	setup_graphic(game);
+	setup_draw(game);
 	setup_hook(game);
 }
 
