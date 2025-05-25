@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	draw(mlx_image_t *img, t_circle *circle);
+static void	draw(t_renderer *renderer, t_circle *circle);
 
 void	circle(uint32_t x, uint32_t y, uint32_t r)
 {
@@ -12,17 +12,20 @@ void	circle(uint32_t x, uint32_t y, uint32_t r)
 	draw_circle(NULL, &circle);
 }
 
-void	draw_circle(mlx_image_t *img, t_circle *circle)
+void	draw_circle(t_renderer *renderer, t_circle *circle)
 {
-	static mlx_image_t	*static_img = NULL;
+	static t_renderer	*static_renderer = NULL;
 
-	if (!static_img)
-		static_img = img;
-	draw(static_img, circle);
+	if (!static_renderer)
+	{
+		static_renderer = renderer;
+		return ;
+	}
+	draw(static_renderer, circle);
 }
 
-static void	draw(mlx_image_t *img, t_circle *circle)
+static void	draw(t_renderer *renderer, t_circle *circle)
 {
-	(void)img;
+	(void)renderer;
 	(void)circle;
 }

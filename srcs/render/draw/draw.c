@@ -2,7 +2,13 @@
 
 void	setup_draw(t_game *game)
 {
-	draw_rect(game->graphic.img[0], NULL);
-	draw_line(game->graphic.img[0], NULL);
-	draw_circle(game->graphic.img[0], NULL);
+	t_renderer	*renderer;
+
+	renderer = &game->renderer;
+	renderer->border = 0;
+	renderer->color = 0;
+	draw_rect(renderer, NULL);
+	draw_line(renderer, NULL);
+	draw_circle(renderer, NULL);
+	draw_color(renderer, NULL, NULL);
 }

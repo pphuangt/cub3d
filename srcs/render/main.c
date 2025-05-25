@@ -48,7 +48,7 @@ static void	render(t_game *game)
 	graphic = &game->graphic;
 	render_map(game);
 	render_player(game);
-	mlx_image_to_window(graphic->window, graphic->img[0], 0, 0);
+	mlx_image_to_window(graphic->window, graphic->img, 0, 0);
 	mlx_loop(graphic->window);
 	mlx_terminate(graphic->window);
 }

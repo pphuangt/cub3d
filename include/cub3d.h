@@ -35,7 +35,7 @@ typedef enum s_keys
 typedef struct s_graphic
 {
 	mlx_t		*window;
-	mlx_image_t	*img[2];
+	mlx_image_t	*img;
 	int32_t		width;
 	int32_t		height;
 }	t_graphic;
@@ -43,6 +43,7 @@ typedef struct s_graphic
 typedef struct s_game
 {
 	t_graphic	graphic;
+	t_renderer	renderer;
 }	t_game;
 
 void	setup_map(t_game *game);
