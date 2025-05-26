@@ -17,7 +17,7 @@ void	draw_line(t_renderer *renderer, t_line *line)
 {
 	static t_renderer	*static_renderer = NULL;
 
-	if (!renderer)
+	if (!static_renderer)
 	{
 		static_renderer = renderer;
 		return ;

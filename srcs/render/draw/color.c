@@ -19,7 +19,7 @@ void	draw_color(t_renderer *renderer, int32_t *color, int32_t *border)
 {
 	static t_renderer	*static_renderer = NULL;
 
-	if (static_renderer == NULL)
+	if (!static_renderer)
 	{
 		static_renderer = renderer;
 		return ;
