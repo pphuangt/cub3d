@@ -26,6 +26,7 @@
 # include "constants.h"
 
 # define TITLE "cub3d"
+# define BPP sizeof(uint32_t)
 
 typedef enum s_keys
 {

@@ -26,6 +26,26 @@ void	draw_circle(t_renderer *renderer, t_circle *circle)
 
 static void	draw(t_renderer *renderer, t_circle *circle)
 {
-	(void)renderer;
-	(void)circle;
+	uint32_t	x;
+	uint32_t	y;
+
+	y = circle->y - circle->r;
+	while (y <= circle->y + circle->r)
+	{
+		x = circle->x - circle->r;
+		while (x <= circle->x + circle->r)
+		{
+			if ((x - circle->x) * (x - circle->x)
+				+ (y - circle->y) * (y - circle->y)
+				<= (circle->r * circle->r))
+			{
+				mlx_put_pixel(renderer->img,
+					x,
+					y,
+					renderer->color);
+			}
+			x++;
+		}
+		y++;
+	}
 }

@@ -4,6 +4,8 @@
 # define GREY 0x808080FF
 # define YELLOW 0xFFFF00FF
 # define RED 0xFF0000FF
+# define BLACK 0x000000FF
+# define WHITE 0xFFFFFFFF
 
 /* map */
 # define COL 15

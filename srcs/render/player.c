@@ -19,5 +19,7 @@ void	setup_player(t_game	*game)
 
 void	render_player(t_game *game)
 {
-	(void) game;
+	(void)game;
+	color(RED);
+	circle(POSX * TILEX - TILEX / 2, POSY * TILEY - TILEY / 2, 6);
 }
