@@ -32,6 +32,12 @@ void	ft_error(t_game *game)
 	exit(EXIT_FAILURE);
 }
 
+void	update(t_game *game)
+{
+	render_map(game);
+	render_player(game);
+}
+
 static void	setup(t_game *game)
 {
 	setup_map(game);

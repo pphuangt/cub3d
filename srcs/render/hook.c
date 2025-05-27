@@ -22,6 +22,7 @@ void	setup_hook(t_game *game)
 	graphic = &game->graphic;
 	mlx_key_hook(graphic->window, esc_exit, game);
 	mlx_close_hook(graphic->window, close_hook, game);
+	mlx_loop_hook(graphic->window, update_player, game);
 }
 
 static void	close_hook(void *param)

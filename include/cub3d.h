@@ -26,7 +26,6 @@
 # include "constants.h"
 
 # define TITLE "cub3d"
-# define BPP sizeof(uint32_t)
 
 typedef enum s_keys
 {
@@ -41,10 +40,26 @@ typedef struct s_graphic
 	int32_t		height;
 }	t_graphic;
 
+typedef struct s_map
+{
+	int	**wall;
+	int	col;
+	int	row;
+}	t_map;
+
+typedef struct s_player
+{
+	uint32_t	x;
+	uint32_t	y;
+	double		angle;
+}	t_player;
+
 typedef struct s_game
 {
 	t_graphic	graphic;
 	t_renderer	renderer;
+	t_map		map;
+	t_player	player;
 }	t_game;
 
 void	setup_map(t_game *game);
@@ -54,6 +69,11 @@ void	setup_hook(t_game *game);
 
 void	render_map(t_game *game);
 void	render_player(t_game *game);
+
+void	update(t_game *game);
+void	update_player(void *param);
+
+bool	has_wall(uint32_t x, uint32_t y);
 
 void	ft_error(t_game *game);
 
