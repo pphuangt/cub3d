@@ -42,13 +42,13 @@ void	update_player(void *param)
 	game = (t_game *)param;
 	graphic = &game->graphic;
 	player = &game->player;
-	if (mlx_is_key_down(graphic->window, MLX_KEY_UP))
+	if (mlx_is_key_down(graphic->window, MLX_KEY_W))
 		move(player, player->x, player->y - 2);
-	if (mlx_is_key_down(graphic->window, MLX_KEY_DOWN))
+	if (mlx_is_key_down(graphic->window, MLX_KEY_S))
 		move(player, player->x, player->y + 2);
-	if (mlx_is_key_down(graphic->window, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(graphic->window, MLX_KEY_D))
 		move(player, player->x + 2, player->y);
-	if (mlx_is_key_down(graphic->window, MLX_KEY_LEFT))
+	if (mlx_is_key_down(graphic->window, MLX_KEY_A))
 		move(player, player->x - 2, player->y);
 	update(game);
 }
