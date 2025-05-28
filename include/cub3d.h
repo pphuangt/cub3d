@@ -28,14 +28,6 @@
 # define MOVE_SPEED 2.0
 # define ROTATE_SPEED 0.05
 
-enum e_dir
-{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT
-};
-
 typedef struct s_graphic
 {
 	mlx_t		*window;
@@ -55,7 +47,11 @@ typedef struct s_player
 {
 	uint32_t	x;
 	uint32_t	y;
-	double		angle;
+	int32_t		move_direction;
+	int32_t		turn_direction;
+	double		rotate_angle;
+	double		move_speed;
+	double		turn_speed;
 }	t_player;
 
 typedef struct s_game
@@ -63,6 +59,7 @@ typedef struct s_game
 	t_graphic	graphic;
 	t_map		map;
 	t_player	player;
+	double		delta_time;
 }	t_game;
 
 void	setup_map(t_game *game);
@@ -74,7 +71,7 @@ void	setup_draw(t_game *game);
 void	render_map(t_game *game);
 void	render_player(t_game *game);
 
-void	update(t_game *game);
+void	update(void *param);
 void	update_player(void *param);
 
 bool	has_wall(uint32_t x, uint32_t y);

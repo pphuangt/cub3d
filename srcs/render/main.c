@@ -13,6 +13,7 @@
 #include "cub3d.h"
 
 static void	setup(t_game *game);
+static void	run(t_game *game);
 static void	render(t_game *game);
 
 int32_t	main(void)
@@ -20,19 +21,20 @@ int32_t	main(void)
 	t_game	game;
 
 	setup(&game);
-	render(&game);
+	run(&game);
 	return (EXIT_SUCCESS);
 }
 
-void	ft_error(t_game *game)
+void	update(void *param)
 {
-	ft_putendl_fd("Error\n", STDERR_FILENO);
-	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
-	terminate(game);
-	exit(EXIT_FAILURE);
+	t_game	*game;
+
+	game = (t_game *)param;
+	game->delta_time = game->graphic.window->delta_time;
+	render(game);
 }
 
-void	update(t_game *game)
+static void	render(t_game *game)
 {
 	render_map(game);
 	render_player(game);
@@ -47,13 +49,11 @@ static void	setup(t_game *game)
 	setup_hook(game);
 }
 
-static void	render(t_game *game)
+static void	run(t_game *game)
 {
 	t_graphic	*graphic;
 
 	graphic = &game->graphic;
-	render_map(game);
-	render_player(game);
 	mlx_image_to_window(graphic->window, graphic->img, 0, 0);
 	mlx_loop(graphic->window);
 	mlx_terminate(graphic->window);

@@ -32,3 +32,11 @@ void	terminate(t_game *game)
 {
 	mlx_close_window(game->graphic.window);
 }
+
+void	ft_error(t_game *game)
+{
+	ft_putendl_fd("Error\n", STDERR_FILENO);
+	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
+	terminate(game);
+	exit(EXIT_FAILURE);
+}
