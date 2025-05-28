@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "draw.h"
 #include "cub3d.h"
 
 static void	draw(t_renderer *renderer, t_rect *rect);

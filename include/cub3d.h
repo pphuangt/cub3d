@@ -22,7 +22,6 @@
 # include <math.h>
 # include "MLX42/MLX42.h"
 # include "libft.h"
-# include "draw.h"
 # include "constants.h"
 
 # define TITLE "cub3d"
@@ -62,7 +61,6 @@ typedef struct s_player
 typedef struct s_game
 {
 	t_graphic	graphic;
-	t_renderer	renderer;
 	t_map		map;
 	t_player	player;
 }	t_game;
@@ -71,6 +69,7 @@ void	setup_map(t_game *game);
 void	setup_player(t_game *game);
 void	setup_graphic(t_game *game);
 void	setup_hook(t_game *game);
+void	setup_draw(t_game *game);
 
 void	render_map(t_game *game);
 void	render_player(t_game *game);
@@ -79,6 +78,12 @@ void	update(t_game *game);
 void	update_player(void *param);
 
 bool	has_wall(uint32_t x, uint32_t y);
+
+void	rect(uint32_t x, uint32_t y, uint32_t w, uint32_t h);
+void	line(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2);
+void	circle(uint32_t x, uint32_t y, uint32_t r);
+void	color(int32_t color);
+void	border(int32_t color);
 
 void	ft_error(t_game *game);
 
