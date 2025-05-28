@@ -26,11 +26,16 @@
 # include "constants.h"
 
 # define TITLE "cub3d"
+# define MOVE_SPEED 2.0
+# define ROTATE_SPEED 0.05
 
-typedef enum s_keys
+enum e_dir
 {
-	ESCAPE = 0xFF1B,
-}	t_keys;
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+};
 
 typedef struct s_graphic
 {
