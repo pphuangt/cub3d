@@ -27,6 +27,7 @@
 # define TITLE "cub3d"
 # define PI 3.14159265
 # define TWO_PI 6.28318530
+# define PI_2 1.5707963267948966
 # define MOVE_SPEED 2.0
 # define ROTATE_SPEED 0.05
 
@@ -50,6 +51,7 @@ typedef struct s_player
 	double	x;
 	double	y;
 	int		move_direction;
+	int		strafe_direction;
 	int		turn_direction;
 	double	rotation_angle;
 	double	move_speed;

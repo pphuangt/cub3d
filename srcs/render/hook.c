@@ -52,8 +52,12 @@ static void	key_pressed(t_player *player, keys_t key)
 {
 	if (key == MLX_KEY_W)
 		player->move_direction = 1;
-	else if (key == MLX_KEY_A)
+	else if (key == MLX_KEY_S)
 		player->move_direction = -1;
+	else if (key == MLX_KEY_D)
+		player->strafe_direction = 1;
+	else if (key == MLX_KEY_A)
+		player->strafe_direction = -1;
 	else if (key == MLX_KEY_RIGHT)
 		player->turn_direction = 1;
 	else if (key == MLX_KEY_LEFT)
@@ -64,8 +68,12 @@ static void	key_release(t_player *player, keys_t key)
 {
 	if (key == MLX_KEY_W)
 		player->move_direction = 0;
-	else if (key == MLX_KEY_A)
+	else if (key == MLX_KEY_S)
 		player->move_direction = 0;
+	else if (key == MLX_KEY_D)
+		player->strafe_direction = 0;
+	else if (key == MLX_KEY_A)
+		player->strafe_direction = 0;
 	else if (key == MLX_KEY_RIGHT)
 		player->turn_direction = 0;
 	else if (key == MLX_KEY_LEFT)
