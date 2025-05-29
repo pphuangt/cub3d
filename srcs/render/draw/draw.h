@@ -25,25 +25,25 @@ typedef struct s_renderer
 
 typedef struct s_rect
 {
-	uint32_t	x;
-	uint32_t	y;
-	uint32_t	w;
-	uint32_t	h;
+	int	x;
+	int	y;
+	int	w;
+	int	h;
 }	t_rect;
 
 typedef struct s_line
 {
-	uint32_t	x1;
-	uint32_t	y1;
-	uint32_t	x2;
-	uint32_t	y2;
+	int	x1;
+	int	y1;
+	int	x2;
+	int	y2;
 }	t_line;
 
 typedef struct s_circle
 {
-	uint32_t	x;
-	uint32_t	y;
-	uint32_t	r;
+	int	x;
+	int	y;
+	int	r;
 }	t_circle;
 
 void	draw_rect(t_renderer *renderer, t_rect *rect);

@@ -15,7 +15,7 @@
 
 static void	draw(t_renderer *renderer, t_rect *rect);
 
-void	rect(uint32_t x, uint32_t y, uint32_t w, uint32_t h)
+void	rect(int x, int y, int w, int h)
 {
 	t_rect	rect;
 
@@ -40,27 +40,22 @@ void	draw_rect(t_renderer *renderer, t_rect *rect)
 
 static void	draw(t_renderer *renderer, t_rect *rect)
 {
-	uint32_t	x;
-	uint32_t	y;
-	int32_t		color;
+	int		i;
+	int		j;
 
-	y = 0;
-	while (y < rect->h)
+	i = rect->x;
+	while (i < (rect->x + rect->w))
 	{
-		x = 0;
-		while (x < rect->w)
+		j = rect->y;
+		while (j < (rect->y + rect->h))
 		{
-			if (y == 0 || y == rect->h - 1 || x == 0 || x == rect->w - 1)
-				color = renderer->border;
+			if (i == 0 || i == (rect->x + rect->w - 1)
+				|| j == 0 || j == (rect->y + rect->h - 1))
+				mlx_put_pixel(renderer->img, i, j, renderer->border);
 			else
-				color = renderer->color;
-			mlx_put_pixel(
-				renderer->img,
-				x + rect->x,
-				y + rect->y,
-				color);
-			x++;
+				mlx_put_pixel(renderer->img, i, j, renderer->color);
+			j++;
 		}
-		y++;
+		i++;
 	}
 }

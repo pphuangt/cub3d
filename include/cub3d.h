@@ -47,13 +47,13 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	uint32_t	x;
-	uint32_t	y;
-	int32_t		move_direction;
-	int32_t		turn_direction;
-	double		rotation_angle;
-	double		move_speed;
-	double		turn_speed;
+	double	x;
+	double	y;
+	int		move_direction;
+	int		turn_direction;
+	double	rotation_angle;
+	double	move_speed;
+	double	turn_speed;
 }	t_player;
 
 typedef struct s_game
@@ -76,13 +76,15 @@ void	render_player(t_game *game);
 void	update(void *param);
 void	update_player(t_game *game);
 
-bool	has_wall_at(uint32_t x, uint32_t y);
+bool	has_wall_at(double x, double y);
 
-void	rect(uint32_t x, uint32_t y, uint32_t w, uint32_t h);
-void	line(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2);
-void	circle(uint32_t x, uint32_t y, uint32_t r);
+void	rect(int x, int y, int w, int h);
+void	line(int x1, int y1, int x2, int y2);
+void	circle(int x, int y, int r);
 void	color(int32_t color);
 void	border(int32_t color);
+
+void	normalize_angle(double *angle);
 
 void	ft_error(t_game *game);
 

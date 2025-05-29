@@ -64,7 +64,14 @@ void	render_map(t_game *game)
 	}
 }
 
-bool	has_wall_at(uint32_t x, uint32_t y)
+bool	has_wall_at(double x, double y)
 {
-	return (g_wall[y / TILEX][x / TILEX]);
+	int		index_x;
+	int		index_y;
+
+	if (x < 0 || x >= COL * TILEX || y < 0 || y >= ROW * TILEY)
+		return (true);
+	index_x = floor(x / TILEX);
+	index_y = floor(y / TILEY);
+	return (g_wall[index_y][index_x] != 0);
 }

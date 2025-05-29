@@ -16,7 +16,7 @@
 static void	draw(t_renderer *renderer, t_line *line);
 static void	put_pixel(t_renderer *renderer, int32_t x, int32_t y);
 
-void	line(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2)
+void	line(int x1, int y1, int x2, int y2)
 {
 	t_line	line;
 
@@ -41,28 +41,27 @@ void	draw_line(t_renderer *renderer, t_line *line)
 
 static void	draw(t_renderer *renderer, t_line *line)
 {
-	int32_t	dx;
-	int32_t	dy;
-	int32_t	steps;
-	int32_t	x;
-	int32_t	y;
+	int		steps;
+	double	x_increment;
+	double	y_increment;
+	double	current_x;
+	double	current_y;
 
-	dx = line->x2 - line->x1;
-	dy = line->y2 - line->y1;
-	if (abs(dx) > abs(dy))
-		steps = abs(dx);
+	x_increment = line->x2 - line->x1;
+	y_increment = line->y2 - line->y1;
+	if (fabs(x_increment) > fabs(y_increment))
+		steps = fabs(x_increment);
 	else
-		steps = abs(dy);
-	x = line->x1 * 1000;
-	y = line->y1 * 1000;
-	dx = (dx * 1000) / steps;
-	dy = (dy * 1000) / steps;
-	while (steps >= 0)
+		steps = fabs(y_increment);
+	x_increment = x_increment / (double)steps;
+	y_increment = y_increment / (double)steps;
+	current_x = line->x1;
+	current_y = line->y1;
+	while (steps--)
 	{
-		put_pixel(renderer, x / 1000, y / 1000);
-		x += dx;
-		y += dy;
-		steps--;
+		put_pixel(renderer, round(current_x), round(current_y));
+		current_x += x_increment;
+		current_y += y_increment;
 	}
 }
 
