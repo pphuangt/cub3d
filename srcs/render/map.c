@@ -64,7 +64,7 @@ void	render_map(t_game *game)
 	}
 }
 
-bool	has_wall(uint32_t x, uint32_t y)
+bool	has_wall_at(uint32_t x, uint32_t y)
 {
 	return (g_wall[y / TILEX][x / TILEX]);
 }

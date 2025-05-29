@@ -25,6 +25,8 @@
 # include "constants.h"
 
 # define TITLE "cub3d"
+# define PI 3.14159265
+# define TWO_PI 6.28318530
 # define MOVE_SPEED 2.0
 # define ROTATE_SPEED 0.05
 
@@ -49,7 +51,7 @@ typedef struct s_player
 	uint32_t	y;
 	int32_t		move_direction;
 	int32_t		turn_direction;
-	double		rotate_angle;
+	double		rotation_angle;
 	double		move_speed;
 	double		turn_speed;
 }	t_player;
@@ -72,9 +74,9 @@ void	render_map(t_game *game);
 void	render_player(t_game *game);
 
 void	update(void *param);
-void	update_player(void *param);
+void	update_player(t_game *game);
 
-bool	has_wall(uint32_t x, uint32_t y);
+bool	has_wall_at(uint32_t x, uint32_t y);
 
 void	rect(uint32_t x, uint32_t y, uint32_t w, uint32_t h);
 void	line(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2);

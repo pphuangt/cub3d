@@ -31,6 +31,7 @@ void	update(void *param)
 
 	game = (t_game *)param;
 	game->delta_time = game->graphic.window->delta_time;
+	update_player(game);
 	render(game);
 }
 
