@@ -30,6 +30,7 @@
 # define PI_2 1.5707963267948966
 # define MOVE_SPEED 2.0
 # define ROTATE_SPEED 0.05
+# define FOV_ANGLE 1.0471975512
 
 typedef struct s_graphic
 {
@@ -58,25 +59,38 @@ typedef struct s_player
 	double	turn_speed;
 }	t_player;
 
+typedef struct s_ray
+{
+	double	angle;
+	double	x;
+	double	y;
+	double	distance;
+}	t_ray;
+
 typedef struct s_game
 {
 	t_graphic	graphic;
 	t_map		map;
 	t_player	player;
+	t_ray		*rays;
+	double		dist_proj_plane;
 	double		delta_time;
 }	t_game;
 
 void	setup_map(t_game *game);
 void	setup_player(t_game *game);
 void	setup_graphic(t_game *game);
-void	setup_hook(t_game *game);
+void	setup_ray(t_game *game);
 void	setup_draw(t_game *game);
+void	setup_hook(t_game *game);
 
 void	render_map(t_game *game);
 void	render_player(t_game *game);
+void	render_ray(t_game *game);
 
 void	update(void *param);
 void	update_player(t_game *game);
+void	cast_rays(t_game *game);
 
 bool	has_wall_at(double x, double y);
 
