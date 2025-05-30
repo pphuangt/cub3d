@@ -94,6 +94,11 @@ void	cast_rays(t_game *game);
 
 bool	has_wall_at(double x, double y);
 
+bool	ray_facing_down(double angle);
+bool	ray_facing_up(double angle);
+bool	ray_facing_right(double angle);
+bool	ray_facing_left(double angle);
+
 void	rect(int x, int y, int w, int h);
 void	line(int x1, int y1, int x2, int y2);
 void	circle(int x, int y, int r);
