@@ -30,7 +30,7 @@
 # define PI_2 1.5707963267948966
 # define MOVE_SPEED 2.0
 # define ROTATE_SPEED 0.05
-# define FOV_ANGLE 1.0471975512
+# define FOV_ANGLE (60 * (PI / 180))
 
 typedef struct s_graphic
 {

@@ -34,11 +34,6 @@ void	render_player(t_game *game)
 	player = &game->player;
 	color(BLUE);
 	circle(player->x, player->y, 6);
-	color(RED);
-	line(player->x,
-		player->y,
-		player->x + cos(player->rotation_angle) * 1000,
-		player->y + sin(player->rotation_angle) * 1000);
 }
 
 void	update_player(t_game *game)

@@ -40,6 +40,7 @@ static void	render(t_game *game)
 {
 	render_map(game);
 	render_player(game);
+	render_ray(game);
 }
 
 static void	setup(t_game *game)
