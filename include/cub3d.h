@@ -30,7 +30,7 @@
 # define PI_2 1.5707963267948966
 # define MOVE_SPEED 2.0
 # define ROTATE_SPEED 0.05
-# define FOV_ANGLE (60 * (PI / 180))
+# define FOV_ANGLE 1.0471975512
 
 typedef struct s_graphic
 {
@@ -73,7 +73,6 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	t_ray		*rays;
-	double		dist_proj_plane;
 	double		delta_time;
 }	t_game;
 
@@ -106,6 +105,7 @@ void	color(int32_t color);
 void	border(int32_t color);
 
 void	normalize_angle(double *angle);
+double	distance_between_points(double x1, double y1, double x2, double y2);
 
 void	ft_error(t_game *game);
 

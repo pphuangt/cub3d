@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pphuangt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/30 20:28:41 by pphuangt          #+#    #+#             */
+/*   Updated: 2025/05/30 20:28:42 by pphuangt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static void		cast_ray(t_game *game, double ray_angle, int strip_id);
@@ -7,8 +19,6 @@ void	setup_ray(t_game *game)
 	static t_ray	static_rays[2048];
 
 	game->rays = static_rays;
-	game->dist_proj_plane = ((double)game->graphic.width / 2.0)
-		/ (tan(FOV_ANGLE / 2.0));
 }
 
 void	render_ray(t_game *game)
@@ -31,11 +41,6 @@ void	render_ray(t_game *game)
 			rays[i].y);
 		i++;
 	}
-}
-
-double	distance_between_points(double x1, double y1, double x2, double y2)
-{
-    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
 void	cast_rays(t_game *game)
