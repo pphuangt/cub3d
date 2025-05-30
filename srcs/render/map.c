@@ -75,3 +75,8 @@ bool	has_wall_at(double x, double y)
 	index_y = floor(y / TILEY);
 	return (g_wall[index_y][index_x] != 0);
 }
+
+bool	is_inside_map(double x, double y)
+{
+	return (x >= 0 && x <= TILEX * COL && y >= 0 && y <= TILEY * ROW);
+}

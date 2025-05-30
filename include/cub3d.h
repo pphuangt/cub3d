@@ -65,6 +65,7 @@ typedef struct s_ray
 	double	x;
 	double	y;
 	double	distance;
+	bool	found_wall_hit;
 }	t_ray;
 
 typedef struct s_game
@@ -73,6 +74,7 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 	t_ray		*rays;
+	double		dist_proj_plane;
 	double		delta_time;
 }	t_game;
 
@@ -92,7 +94,10 @@ void	update_player(t_game *game);
 void	cast_rays(t_game *game);
 
 bool	has_wall_at(double x, double y);
+bool	is_inside_map(double x, double y);
 
+t_ray	horizontal_intersection(t_player *player, double ray_angle);
+t_ray	vertical_intersection(t_player *player, double ray_angle);
 bool	ray_facing_down(double angle);
 bool	ray_facing_up(double angle);
 bool	ray_facing_right(double angle);
