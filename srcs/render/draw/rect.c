@@ -49,8 +49,8 @@ static void	draw(t_renderer *renderer, t_rect *rect)
 		j = rect->y;
 		while (j < (rect->y + rect->h))
 		{
-			if (i == 0 || i == (rect->x + rect->w - 1)
-				|| j == 0 || j == (rect->y + rect->h - 1))
+			if (i == rect->x || i == (rect->x + rect->w - 1)
+				|| j == rect->y || j == (rect->y + rect->h - 1))
 				mlx_put_pixel(renderer->img, i, j, renderer->border);
 			else
 				mlx_put_pixel(renderer->img, i, j, renderer->color);

@@ -74,11 +74,11 @@ static void	cast_ray(t_game *game, double ray_angle, int strip_id)
 	player = &game->player;
 	horizontal = horizontal_intersection(player, ray_angle);
 	vertical = vertical_intersection(player, ray_angle);
-	horizontal.distance = INT_MAX;
+	horizontal.distance = INFINITY;
 	if (horizontal.found_wall_hit)
 		horizontal.distance = distance_between_points(player->x, player->y,
 				horizontal.x, horizontal.y);
-	vertical.distance = INT_MAX;
+	vertical.distance = INFINITY;
 	if (vertical.found_wall_hit)
 		vertical.distance = distance_between_points(player->x, player->y,
 				vertical.x, vertical.y);
