@@ -37,10 +37,10 @@ void	render_ray(t_game *game)
 	num_rays = game->graphic.width;
 	while (i < num_rays)
 	{
-		line(player->x,
-			player->y,
-			rays[i].x,
-			rays[i].y);
+		line(round(player->x),
+			round(player->y),
+			round(rays[i].x),
+			round(rays[i].y));
 		i++;
 	}
 }

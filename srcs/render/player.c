@@ -33,7 +33,7 @@ void	render_player(t_game *game)
 
 	player = &game->player;
 	color(BLUE);
-	circle(player->x, player->y, 6);
+	circle(round(player->x), round(player->y), 6);
 }
 
 void	update_player(t_game *game)
