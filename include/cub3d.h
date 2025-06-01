@@ -36,8 +36,6 @@ typedef struct s_graphic
 {
 	mlx_t		*window;
 	mlx_image_t	*img;
-	int32_t		width;
-	int32_t		height;
 }	t_graphic;
 
 typedef struct s_map
@@ -45,6 +43,8 @@ typedef struct s_map
 	int	**wall;
 	int	col;
 	int	row;
+	int	width;
+	int	height;
 }	t_map;
 
 typedef struct s_player
@@ -93,8 +93,8 @@ void	update(void *param);
 void	update_player(t_game *game);
 void	cast_rays(t_game *game);
 
-bool	has_wall_at(double x, double y);
-bool	is_inside_map(double x, double y);
+bool	map_has_wall_at(double x, double y);
+bool	map_is_inside(double x, double y);
 
 t_ray	horizontal_intersection(t_player *player, double ray_angle);
 t_ray	vertical_intersection(t_player *player, double ray_angle);

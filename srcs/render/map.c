@@ -12,6 +12,8 @@
 
 #include "cub3d.h"
 
+static bool	map_collision(t_map *map, double x, double y, int operation);
+
 int	g_wall[ROW][COL] = {
 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -29,15 +31,14 @@ int	g_wall[ROW][COL] = {
 
 void	setup_map(t_game *game)
 {
-	t_graphic	*graphic;
 	t_map		*map;
 
-	graphic = &game->graphic;
-	graphic->height = TILEY * ROW;
-	graphic->width = TILEX * COL;
 	map = &game->map;
 	map->col = COL;
 	map->row = ROW;
+	map->width = TILE_SIZE * COL;
+	map->height = TILE_SIZE * ROW;
+	map_collision(map, 0, 0, 0);
 }
 
 void	render_map(t_game *game)
@@ -57,26 +58,42 @@ void	render_map(t_game *game)
 				color(BLACK);
 			else
 				color(WHITE);
-			rect(x * TILEX, y * TILEY, TILEX, TILEY);
+			rect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 			x++;
 		}
 		y++;
 	}
 }
 
-bool	has_wall_at(double x, double y)
+bool	map_has_wall_at(double x, double y)
 {
-	int		index_x;
-	int		index_y;
-
-	if (x < 0 || x >= COL * TILEX || y < 0 || y >= ROW * TILEY)
-		return (true);
-	index_x = floor(x / TILEX);
-	index_y = floor(y / TILEY);
-	return (g_wall[index_y][index_x] != 0);
+	return (map_collision(NULL, x, y, 2));
 }
 
-bool	is_inside_map(double x, double y)
+bool	map_is_inside(double x, double y)
 {
-	return (x >= 0 && x < TILEX * COL && y >= 0 && y < TILEY * ROW);
+	return (map_collision(NULL, x, y, 1));
+}
+
+static bool	map_collision(t_map *map, double x, double y, int operation)
+{
+	static t_map	*static_map = NULL;
+	int				index_x;
+	int				index_y;
+
+	if (!static_map)
+	{
+		static_map = map;
+		return (true);
+	}
+	if (operation == 1)
+	{
+		return (x >= 0 && x < static_map->width
+			&& y >= 0 && y < static_map->height);
+	}
+	if (x < 0 || x >= static_map->width || y < 0 || y >= static_map->height)
+		return (true);
+	index_x = floor(x / TILE_SIZE);
+	index_y = floor(y / TILE_SIZE);
+	return (g_wall[index_y][index_x] != 0);
 }

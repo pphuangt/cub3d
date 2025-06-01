@@ -23,8 +23,7 @@
 /* map */
 # define COL 15
 # define ROW 12
-# define TILEX 32
-# define TILEY 32
+# define TILE_SIZE 32
 
 /* player */
 # define POSX 8

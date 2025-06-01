@@ -17,8 +17,8 @@ void	setup_player(t_game	*game)
 	t_player	*player;
 
 	player = &game->player;
-	player->x = POSX * TILEX - TILEX / 2;
-	player->y = POSY * TILEY - TILEY / 2;
+	player->x = POSX * TILE_SIZE - TILE_SIZE / 2;
+	player->y = POSY * TILE_SIZE - TILE_SIZE / 2;
 	player->move_direction = 0;
 	player->strafe_direction = 0;
 	player->turn_direction = 0;
@@ -55,7 +55,7 @@ void	update_player(t_game *game)
 		+ cos(player->rotation_angle + PI_2) * strafe_step;
 	y = player->y + sin(player->rotation_angle) * move_step
 		+ sin(player->rotation_angle + PI_2) * strafe_step;
-	if (!has_wall_at(x, y))
+	if (!map_has_wall_at(x, y))
 	{
 		player->x = x;
 		player->y = y;

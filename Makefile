@@ -12,7 +12,7 @@ LIBS = $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L$(LIBMLX)
 
 SRCS_DIR = ./srcs
 RENDER_DIR = $(SRCS_DIR)/render
-SRCS = $(addprefix $(RENDER_DIR)/, main.c hook.c map.c player.c graphic.c ray.c ray_intersection.c ray_utils.c utils.c) \
+SRCS = $(addprefix $(RENDER_DIR)/, main.c hook.c map.c player.c graphic.c ray.c ray_horizontal.c ray_vertical.c ray_utils.c utils.c) \
 		$(addprefix $(RENDER_DIR)/draw/, draw.c rect.c line.c circle.c color.c)
 OBJS = $(SRCS:.c=.o)
 

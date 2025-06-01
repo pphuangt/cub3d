@@ -19,7 +19,7 @@ void	setup_ray(t_game *game)
 	static t_ray	static_rays[2048];
 
 	game->rays = static_rays;
-	game->dist_proj_plane = ((double)game->graphic.width / 2)
+	game->dist_proj_plane = ((double)game->map.width / 2)
 		/ (tan(FOV_ANGLE / 2));
 }
 
@@ -34,7 +34,7 @@ void	render_ray(t_game *game)
 	rays = game->rays;
 	i = 0;
 	color(RED);
-	num_rays = game->graphic.width;
+	num_rays = game->map.width;
 	while (i < num_rays)
 	{
 		line(round(player->x),
@@ -53,7 +53,7 @@ void	cast_rays(t_game *game)
 	int			i;
 
 	player = &game->player;
-	num_rays = game->graphic.width;
+	num_rays = game->map.width;
 	i = 0;
 	while (i < num_rays)
 	{
