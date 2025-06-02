@@ -12,6 +12,8 @@
 
 #include "cub3d.h"
 
+static bool	is_walkable(double x1, double y1, double x2, double y2);
+
 void	setup_player(t_game	*game)
 {
 	t_player	*player;
@@ -55,9 +57,31 @@ void	update_player(t_game *game)
 		+ cos(player->rotation_angle + PI_2) * strafe_step;
 	y = player->y + sin(player->rotation_angle) * move_step
 		+ sin(player->rotation_angle + PI_2) * strafe_step;
-	if (!map_has_wall_at(x, y))
+	if (is_walkable(player->x, player->y, x, y))
 	{
 		player->x = x;
 		player->y = y;
 	}
+}
+
+static bool	is_walkable(double x1, double y1, double x2, double y2)
+{
+	int curr_tile_x;
+	int curr_tile_y;
+	int	dest_tile_x;
+	int	dest_tile_y;
+
+	if (!map_is_inside(x2, y2) || map_has_wall_at(x2, y2))
+		return false;
+	curr_tile_x = (int)(x1 / TILE_SIZE);
+	curr_tile_y = (int)(y1 / TILE_SIZE);
+	dest_tile_x = (int)(x2 / TILE_SIZE);
+	dest_tile_y = (int)(y2 / TILE_SIZE);
+	if (curr_tile_x != dest_tile_x && curr_tile_y != dest_tile_y)
+	{
+		if (map_has_wall_at(x2, y1) || map_has_wall_at(x1, y2))
+			return false;
+	}
+
+	return true;
 }
