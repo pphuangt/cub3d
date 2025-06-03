@@ -38,6 +38,7 @@ void	update(void *param)
 
 static void	render(t_game *game)
 {
+	render_wall(game);
 	render_map(game);
 	render_player(game);
 	render_ray(game);

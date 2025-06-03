@@ -35,7 +35,9 @@ void	render_player(t_game *game)
 
 	player = &game->player;
 	color(BLUE);
-	circle(round(player->x), round(player->y), 6);
+	circle(round(player->x * MINIMAP_SCALE),
+		round(player->y * MINIMAP_SCALE),
+		6);
 }
 
 void	update_player(t_game *game)
@@ -66,13 +68,13 @@ void	update_player(t_game *game)
 
 static bool	is_walkable(double x1, double y1, double x2, double y2)
 {
-	int curr_tile_x;
-	int curr_tile_y;
+	int	curr_tile_x;
+	int	curr_tile_y;
 	int	dest_tile_x;
 	int	dest_tile_y;
 
 	if (!map_is_inside(x2, y2) || map_has_wall_at(x2, y2))
-		return false;
+		return (false);
 	curr_tile_x = (int)(x1 / TILE_SIZE);
 	curr_tile_y = (int)(y1 / TILE_SIZE);
 	dest_tile_x = (int)(x2 / TILE_SIZE);
@@ -80,8 +82,7 @@ static bool	is_walkable(double x1, double y1, double x2, double y2)
 	if (curr_tile_x != dest_tile_x && curr_tile_y != dest_tile_y)
 	{
 		if (map_has_wall_at(x2, y1) || map_has_wall_at(x1, y2))
-			return false;
+			return (false);
 	}
-
-	return true;
+	return (true);
 }

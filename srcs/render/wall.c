@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constants.h                                        :+:      :+:    :+:   */
+/*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pphuangt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 20:06:17 by pphuangt          #+#    #+#             */
-/*   Updated: 2025/05/27 20:06:18 by pphuangt         ###   ########.fr       */
+/*   Created: 2025/06/03 08:47:07 by pphuangt          #+#    #+#             */
+/*   Updated: 2025/06/03 08:47:09 by pphuangt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONSTANTS_H
-# define CONSTANTS_H
+#include "cub3d.h"
 
-# define GREY 0x808080FF
-# define YELLOW 0xFFFF00FF
-# define BLUE 0x58A5C7FF
-# define RED 0xFF0000FF
-# define BLACK 0x000000FF
-# define WHITE 0xFFFFFFFF
+void	render_wall(t_game *game)
+{
+	t_map	*map;
 
-/* map */
-# define COL 15
-# define ROW 12
-# define TILE_SIZE 128
-# define MINIMAP_SCALE 0.2
-
-/* player */
-# define POSX 8
-# define POSY 6
-# define RADIUS 8
-# define ROTATE_ANGLE
-
-#endif
+	map = &game->map;
+	border(BLUE);
+	color(BLUE);
+	rect(0, 0, map->width, map->height / 2);
+	border(GREY);
+	color(GREY);
+	rect(0, map->height / 2, map->width, map->height / 2);
+}

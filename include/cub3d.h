@@ -88,6 +88,7 @@ void	setup_hook(t_game *game);
 void	render_map(t_game *game);
 void	render_player(t_game *game);
 void	render_ray(t_game *game);
+void	render_wall(t_game *game);
 
 void	update(void *param);
 void	update_player(t_game *game);

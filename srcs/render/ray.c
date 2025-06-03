@@ -37,10 +37,10 @@ void	render_ray(t_game *game)
 	num_rays = game->map.width;
 	while (i < num_rays)
 	{
-		line(round(player->x),
-			round(player->y),
-			round(rays[i].x),
-			round(rays[i].y));
+		line(round(player->x * MINIMAP_SCALE),
+			round(player->y * MINIMAP_SCALE),
+			round(rays[i].x * MINIMAP_SCALE),
+			round(rays[i].y * MINIMAP_SCALE));
 		i++;
 	}
 }
