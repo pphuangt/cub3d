@@ -58,10 +58,10 @@ void	render_map(t_game *game)
 				color(BLACK);
 			else
 				color(WHITE);
-			rect(x * TILE_SIZE * MINIMAP_SCALE,
-				y * TILE_SIZE * MINIMAP_SCALE,
-				TILE_SIZE * MINIMAP_SCALE,
-				TILE_SIZE * MINIMAP_SCALE);
+			rect(round(x * TILE_SIZE * MINIMAP_SCALE),
+				round(y * TILE_SIZE * MINIMAP_SCALE),
+				round(TILE_SIZE * MINIMAP_SCALE),
+				round(TILE_SIZE * MINIMAP_SCALE));
 			x++;
 		}
 		y++;
