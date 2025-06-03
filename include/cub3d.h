@@ -66,6 +66,7 @@ typedef struct s_ray
 	double	y;
 	double	distance;
 	bool	found_wall_hit;
+	bool	was_hit_vertical;
 }	t_ray;
 
 typedef struct s_game
@@ -112,6 +113,7 @@ void	border(int32_t color);
 
 void	normalize_angle(double *angle);
 double	distance_between_points(double x1, double y1, double x2, double y2);
+int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
 void	ft_error(t_game *game);
 

@@ -23,11 +23,6 @@ void	border(int32_t color)
 	draw_color(NULL, NULL, &color);
 }
 
-int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
-
 void	draw_color(t_renderer *renderer, int32_t *color, int32_t *border)
 {
 	static t_renderer	*static_renderer = NULL;

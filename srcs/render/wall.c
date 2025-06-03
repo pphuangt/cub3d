@@ -38,6 +38,8 @@ static void	render_projection_wall(t_game *game, int width, int height)
 {
 	double	wall_height;
 	double	correct_distance;
+	int		brightness;
+	int		wall_color;
 	int		i;
 
 	i = 0;
@@ -48,12 +50,13 @@ static void	render_projection_wall(t_game *game, int width, int height)
 		wall_height = (TILE_SIZE / correct_distance) * game->dist_proj_plane;
 		if (wall_height > height)
 			wall_height = height;
-		border(WHITE);
-		color(WHITE);
-		rect(i,
-			height / 2 - wall_height / 2,
-			1,
-			wall_height);
+		brightness = 200;
+		if (game->rays[i].was_hit_vertical)
+			brightness = 255;
+		wall_color = ft_pixel(brightness, brightness, brightness, 255);
+		border(wall_color);
+		color(wall_color);
+		rect(i, height / 2 - wall_height / 2, 1, wall_height);
 		i++;
 	}
 }
