@@ -39,6 +39,13 @@ void	setup_map(t_game *game)
 	map->width = TILE_SIZE * COL;
 	map->height = TILE_SIZE * ROW;
 	map_collision(map, 0, 0, 0);
+	map->textures[0] = mlx_load_png("./images/colorstone.png");
+	map->textures[1] = mlx_load_png("./images/graystone.png");
+	map->textures[2] = mlx_load_png("./images/mossystone.png");
+	map->textures[3] = mlx_load_png("./images/redbrick.png");
+	if (!map->textures[0] || !map->textures[1]
+		|| !map->textures[2] || !map->textures[3])
+		ft_error(game);
 }
 
 void	render_map(t_game *game)

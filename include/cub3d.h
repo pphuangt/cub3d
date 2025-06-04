@@ -40,11 +40,12 @@ typedef struct s_graphic
 
 typedef struct s_map
 {
-	int	**wall;
-	int	col;
-	int	row;
-	int	width;
-	int	height;
+	int				**wall;
+	int				col;
+	int				row;
+	int				width;
+	int				height;
+	mlx_texture_t	*textures[4];
 }	t_map;
 
 typedef struct s_player
