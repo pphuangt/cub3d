@@ -13,7 +13,7 @@
 #include "cub3d.h"
 
 static void				render_ceil_floor(int width, int height);
-static void				render_projection_wall(t_game *game, int width, int height);
+static void				render_projection_wall(t_game *game, int width);
 static void				draw_wall_texture(t_game *game, double wall_height, int i);
 static mlx_texture_t	*get_texture(t_ray *ray, mlx_texture_t *textures[4]);
 
@@ -23,7 +23,7 @@ void	render_wall(t_game *game)
 
 	map = &game->map;
 	render_ceil_floor(map->width, map->height);
-	render_projection_wall(game, map->width, map->height);
+	render_projection_wall(game, map->width);
 }
 
 static void	render_ceil_floor(int width, int height)
@@ -36,7 +36,7 @@ static void	render_ceil_floor(int width, int height)
 	rect(0, height / 2, width, height / 2);
 }
 
-static void	render_projection_wall(t_game *game, int width, int height)
+static void	render_projection_wall(t_game *game, int width)
 {
 	double	wall_height;
 	double	correct_distance;
@@ -48,8 +48,6 @@ static void	render_projection_wall(t_game *game, int width, int height)
 		correct_distance = game->rays[i].distance
 			* cos(game->player.rotation_angle - game->rays[i].angle);
 		wall_height = (TILE_SIZE / correct_distance) * game->dist_proj_plane;
-		if (wall_height > height)
-			wall_height = height;
 		draw_wall_texture(game, wall_height, i);
 		i++;
 	}

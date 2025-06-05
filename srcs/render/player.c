@@ -12,7 +12,8 @@
 
 #include "cub3d.h"
 
-static bool	is_walkable(double x1, double y1, double x2, double y2);
+static bool	is_walkable(double x, double y);
+static void	set_player_position(t_player *player, double new_x, double new_y);
 
 void	setup_player(t_game	*game)
 {
@@ -37,7 +38,7 @@ void	render_player(t_game *game)
 	color(BLUE);
 	circle(round(player->x * MINIMAP_SCALE),
 		round(player->y * MINIMAP_SCALE),
-		6);
+		PLAYER_POINT);
 }
 
 void	update_player(t_game *game)
@@ -45,8 +46,8 @@ void	update_player(t_game *game)
 	t_player	*player;
 	double		move_step;
 	double		strafe_step;
-	double		x;
-	double		y;
+	double		new_x;
+	double		new_y;
 
 	player = &game->player;
 	player->rotation_angle += player->turn_direction
@@ -55,34 +56,36 @@ void	update_player(t_game *game)
 	move_step = player->move_direction * player->move_speed * game->delta_time;
 	strafe_step = player->strafe_direction
 		* player->move_speed * game->delta_time;
-	x = player->x + cos(player->rotation_angle) * move_step
+	new_x = player->x + cos(player->rotation_angle) * move_step
 		+ cos(player->rotation_angle + PI_2) * strafe_step;
-	y = player->y + sin(player->rotation_angle) * move_step
+	new_y = player->y + sin(player->rotation_angle) * move_step
 		+ sin(player->rotation_angle + PI_2) * strafe_step;
-	if (is_walkable(player->x, player->y, x, y))
-	{
-		player->x = x;
-		player->y = y;
-	}
+	set_player_position(player, new_x, new_y);
 }
 
-static bool	is_walkable(double x1, double y1, double x2, double y2)
+static void	set_player_position(t_player *player, double new_x, double new_y)
 {
-	int	curr_tile_x;
-	int	curr_tile_y;
-	int	dest_tile_x;
-	int	dest_tile_y;
-
-	if (!map_is_inside(x2, y2) || map_has_wall_at(x2, y2))
-		return (false);
-	curr_tile_x = (int)(x1 / TILE_SIZE);
-	curr_tile_y = (int)(y1 / TILE_SIZE);
-	dest_tile_x = (int)(x2 / TILE_SIZE);
-	dest_tile_y = (int)(y2 / TILE_SIZE);
-	if (curr_tile_x != dest_tile_x && curr_tile_y != dest_tile_y)
+	if (is_walkable(new_x, new_y))
 	{
-		if (map_has_wall_at(x2, y1) || map_has_wall_at(x1, y2))
-			return (false);
+		player->x = new_x;
+		player->y = new_y;
 	}
+	else if (is_walkable(new_x, player->y))
+		player->x = new_x;
+	else if (is_walkable(player->x, new_y))
+		player->y = new_y;
+}
+
+static bool	is_walkable(double x, double y)
+{
+	if (map_has_wall_at(x + PLAYER_WALL_GAP, y)
+		|| map_has_wall_at(x - PLAYER_WALL_GAP, y)
+		|| map_has_wall_at(x, y + PLAYER_WALL_GAP)
+		|| map_has_wall_at(x, y - PLAYER_WALL_GAP)
+		|| map_has_wall_at(x + PLAYER_WALL_GAP, y + PLAYER_WALL_GAP)
+		|| map_has_wall_at(x - PLAYER_WALL_GAP, y + PLAYER_WALL_GAP)
+		|| map_has_wall_at(x + PLAYER_WALL_GAP, y - PLAYER_WALL_GAP)
+		|| map_has_wall_at(x - PLAYER_WALL_GAP, y - PLAYER_WALL_GAP))
+		return (false);
 	return (true);
 }

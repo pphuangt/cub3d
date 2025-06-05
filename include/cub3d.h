@@ -31,6 +31,9 @@
 # define MOVE_SPEED 2.0
 # define ROTATE_SPEED 0.05
 # define FOV_ANGLE 1.0471975512
+# define TILE_SIZE 64
+# define PLAYER_WALL_GAP 8
+# define PLAYER_POINT 3
 
 typedef struct s_graphic
 {

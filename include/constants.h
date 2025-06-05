@@ -23,7 +23,6 @@
 /* map */
 # define COL 15
 # define ROW 12
-# define TILE_SIZE 64
 # define MINIMAP_SCALE 0.2
 
 /* player */
