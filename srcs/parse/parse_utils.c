@@ -32,8 +32,6 @@ void	free_input_memory(t_game *game)
 		free(game->input.we_path);
 	if (game->input.ea_path)
 		free(game->input.ea_path);
-	if (game->input.door_path)
-		free(game->input.door_path);
 	if (game->input.f_color)
 		free(game->input.f_color);
 	if (game->input.c_color)
@@ -67,7 +65,7 @@ char	*skip_texture_lines(int fd)
 		if (ft_strncmp(line, "SO", 2) == 0 || ft_strncmp(line, "NO", 2) == 0
 			|| ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0
 			|| ft_strncmp(line, "F", 1) == 0 || ft_strncmp(line, "C", 1) == 0
-			|| ft_strncmp(line, "D", 1) == 0 || ft_strncmp(line, "\n", 1) == 0)
+			|| ft_strncmp(line, "\n", 1) == 0)
 		{
 			free(line);
 			continue ;

@@ -57,8 +57,6 @@ static void	get_texture_path(char *dir, char *line, t_game *game)
 		load_text_path(&game->input.we_path, path, "Can't open WE_text", game);
 	else if (strcmp(dir, "EA") == 0)
 		load_text_path(&game->input.ea_path, path, "Can't open EA_text", game);
-	else if (strcmp(dir, "D") == 0)
-		load_text_path(&game->input.door_path, path, "Can't open D_text", game);
 	free(tmp[0]);
 	free(tmp[1]);
 	free(tmp);
@@ -83,8 +81,6 @@ int	parse_texture(char *filename, t_game *game)
 			get_texture_path("WE", line, game);
 		if (ft_strncmp(line, "EA", 2) == 0)
 			get_texture_path("EA", line, game);
-		if (ft_strncmp(line, "D", 1) == 0)
-			get_texture_path("D", line, game);
 		free(line);
 	}
 	close(fd);

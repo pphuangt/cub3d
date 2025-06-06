@@ -27,7 +27,7 @@
 # include "fcntl.h"
 
 # define TITLE "cub3d"
-# define TEXTURE_COUNT 5 //NO, SO, WE, EA, D
+# define TEXTURE_COUNT 4 //NO, SO, WE, EA
 
 typedef enum s_keys
 {
@@ -55,7 +55,7 @@ typedef struct s_input
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
-	char		*door_path;
+	//char		*door_path;
 	char		*f_color;
 	char		*c_color;
 	int			f_color_int;

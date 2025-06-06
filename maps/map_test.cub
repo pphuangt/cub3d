@@ -1,0 +1,14 @@
+NO ./src/textures/no_wall.xpm
+SO ./src/textures/so_wall.xpm
+WE ./src/textures/we_wall.xpm
+EA ./src/textures/ea_wall.xpm
+D ./src/textures/door.xpm
+C 0,50,120
+F 100,100,100
+
+
+11111111
+10000001
+1000N021
+10000001
+11112111
