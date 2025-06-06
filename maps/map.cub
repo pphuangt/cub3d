@@ -1,7 +1,7 @@
-NO ./src/images/colorstone.png
-SO ./src/images/graystone.png
-WE ./src/images/mossystone.png
-EA ./src/images/redbrick.png
+NO ./images/colorstone.png
+SO ./images/graystone.png
+WE ./images/mossystone.png
+EA ./images/redbrick.png
 C 0,50,120
 F 100,100,100
 
