@@ -44,7 +44,6 @@ typedef struct s_graphic
 
 typedef struct s_input
 {
-	t_graphic	*textures;
 	char		*map;
 	size_t		row_count;
 	size_t		col_count;
@@ -55,7 +54,6 @@ typedef struct s_input
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
-	//char		*door_path;
 	char		*f_color;
 	char		*c_color;
 	int			f_color_int;
@@ -77,7 +75,6 @@ void    setup_player(t_game *game);
 void    render_player(t_game *game);
 
 void	check_map_filename(char *filename, t_game *game);
-void	allocate_texture(t_game *game);
 int		parse_texture(char *filename, t_game *game);
 int		check_texture_filename(char **splitted_text_path);
 int		parse_color_str(char *filename, t_game *game);

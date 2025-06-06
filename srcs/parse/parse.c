@@ -42,7 +42,6 @@ void	parse_map_file(char *filename, t_game *game)
 {
 	open_map_file(filename, game);
 	check_map_filename(filename, game);
-	allocate_texture(game);
 	if (parse_texture(filename, game))
 		free_and_exit(game, "Error parsing textures\n");
 	if (parse_color_str(filename, game))

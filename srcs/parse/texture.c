@@ -12,16 +12,6 @@
 
 #include "cub3d.h"
 
-void	allocate_texture(t_game *game)
-{
-	t_graphic	*alloced_texts;
-
-	alloced_texts = (t_graphic *) malloc(TEXTURE_COUNT * sizeof(t_graphic));
-	if (!alloced_texts)
-		free_and_exit(game, "Error allocating memory for textures");
-	game->input.textures = alloced_texts;
-}
-
 static void	load_text_path(char **text_path,
 	char *path, const char *err_msg, t_game *game)
 {
