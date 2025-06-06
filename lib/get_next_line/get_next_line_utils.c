@@ -49,7 +49,7 @@ char	*ft_gnl_strjoin(const char *s1, const char *s2)
 
 	if (s1 == NULL && s2 == NULL)
 		return (NULL);
-	result_len = ft_strlen((char *)s1) + ft_strlen((char *)s2);
+	result_len = ft_gnl_strlen((char *)s1) + ft_gnl_strlen((char *)s2);
 	result = malloc (sizeof(char) * (result_len + 1));
 	if (!result)
 		return (NULL);

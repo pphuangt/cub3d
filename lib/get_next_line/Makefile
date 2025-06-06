@@ -25,7 +25,7 @@ all: $(NAME)
 $(NAME): $(OBJECTS)
 	$(AR) $(NAME) $(OBJECTS)
 
-$(OBJECTS): ft_printf.h
+$(OBJECTS): get_next_line.h
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

@@ -26,7 +26,9 @@ SRCS =	./srcs/main.c \
 		./srcs/parse/parse_color_str.c \
 		./srcs/parse/parse_utils.c \
 		./srcs/parse/parse.c \
-		./srcs/parse/texture.c
+		./srcs/parse/texture.c \
+		$(GNL)/get_next_line.c \
+		$(GNL)/get_next_line_utils.c
 OBJS_DIR = objs
 OBJS = $(SRCS:./%.c=$(OBJS_DIR)/%.o)
 
@@ -55,6 +57,8 @@ libmlx:
 
 $(NAME) : $(OBJS)
 	$(MAKE) -C $(LIBFT)
+	$(MAKE) -C $(PRINTF)
+	$(MAKE) -C $(GNL)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) $(OS_FLAGS) $(HEADERS)
 
 # %.o: %.c

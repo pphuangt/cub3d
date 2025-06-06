@@ -14,9 +14,9 @@
 
 static int	check_top_bottom_walls(t_game *game)
 {
-	int	i;
-	int	row_cnt;
-	int	col_cnt;
+	size_t	i;
+	size_t	row_cnt;
+	size_t	col_cnt;
 
 	row_cnt = game->input.row_count;
 	col_cnt = game->input.col_count;
@@ -38,7 +38,7 @@ static int	check_top_bottom_walls(t_game *game)
 	return (0);
 }
 
-static void	check_around_tiles(t_game *game, int x, int y)
+static void	check_around_tiles(t_game *game, size_t x, size_t y)
 {
 	if (x == 0)
 		check_udr(game, x, y);
@@ -64,8 +64,8 @@ static void	set_start_pos(t_game *game, int x, int y)
 
 static int	check_each_tiles_and_set_dir(t_game *game)
 {
-	int	x;
-	int	y;
+	size_t	x;
+	size_t	y;
 
 	y = 1;
 	while (y < game->input.row_count - 1)

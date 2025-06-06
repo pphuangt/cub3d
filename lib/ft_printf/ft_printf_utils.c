@@ -100,7 +100,7 @@ void	ft_putnum(long long int nbr, int *length, int base, char d_i_x_or_X)
 		if (d_i_x_or_X == 'x' || d_i_x_or_X == 'd' || d_i_x_or_X == 'i')
 			str[i++] = base_chars[nbr % base];
 		else if (d_i_x_or_X == 'X')
-			str[i++] = ft_toupper(base_chars[nbr % base]);
+			str[i++] = ft_printf_toupper(base_chars[nbr % base]);
 		nbr /= base;
 	}
 	while (--i >= 0)
