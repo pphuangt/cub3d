@@ -21,6 +21,8 @@
 # include <unistd.h>
 # include "MLX42/MLX42.h"
 # include "libft.h"
+# include "get_next_line.h"
+# include "ft_printf.h"
 # include <math.h>
 # include "constants.h"
 # include "fcntl.h"
@@ -41,20 +43,12 @@ typedef struct s_graphic
 	int32_t		height;
 }	t_graphic;
 
-typedef struct s_game
-{
-	t_graphic	graphic;
-	t_input		input;
-	int			**map_data;
-
-}	t_game;
-
 typedef struct s_input
 {
 	t_graphic	*textures;
 	char		*map;
-	int			row_count;
-	int			col_count;
+	size_t		row_count;
+	size_t		col_count;
 	int			posx;
 	int			posy;
 	char		pos_dirctn;
@@ -69,17 +63,26 @@ typedef struct s_input
 	int			c_color_int;
 }	t_input;
 
+typedef struct s_game
+{
+	t_graphic	graphic;
+	t_input		input;
+	int			**map_data;
+
+}	t_game;
+
 void	parse_map_file(char *in_file, t_game *game);
 void    setup_map(t_game *game);
 void    render_map(t_game *game);
 void    setup_player(t_game *game);
 void    render_player(t_game *game);
 
-void	check_map_filename(char *filename);
+void	check_map_filename(char *filename, t_game *game);
 void	allocate_texture(t_game *game);
 int		parse_texture(char *filename, t_game *game);
 int		check_texture_filename(char **splitted_text_path);
 int		parse_color_str(char *filename, t_game *game);
+void	convert_colors(t_game *game);
 void	get_map_info(char *filename, t_game *game);
 void	load_and_validate_map(char *filename, t_game *game);
 void    check_map(t_game *game);
@@ -90,8 +93,9 @@ void	check_ulr(t_game *game, int x, int y);
 void	check_udlr(t_game *game, int x, int y);
 
 void	check_malloc(void *ptr, t_game *game);
+void	free_input_memory(t_game *game);
 void	free_and_exit(t_game *game, const char *msg);
-char	*skip_texture_lines(int fd, t_game *game);
+char	*skip_texture_lines(int fd);
 
 
 void	esc_exit(mlx_key_data_t keydata, void *param);

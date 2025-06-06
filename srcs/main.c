@@ -52,17 +52,52 @@ void	render(t_game *game)
 	mlx_terminate(graphic->window);
 }
 
-int32_t	main(int ac, char **av)
-{
-	t_game	game;
+// int32_t	main(int ac, char **av)
+// {
+// 	t_game	game;
 
-	if (ac != 2)
-	{
-		ft_putendl_fd("Error\nUsage: ./cub3d <map.cub>", STDERR_FILENO);
-		return (EXIT_FAILURE);
-	}
-	parse_map_file(av[1], &game);
-	setup(&game);
-	render(&game);
-	return (EXIT_SUCCESS);
+// 	if (ac != 2)
+// 	{
+// 		ft_putendl_fd("Error\nUsage: ./cub3d <map.cub>", STDERR_FILENO);
+// 		return (EXIT_FAILURE);
+// 	}
+// 	parse_map_file(av[1], &game);
+// 	setup(&game);
+// 	render(&game);
+// 	return (EXIT_SUCCESS);
+// }
+
+//-------Test Code for Parsing Textures and Colors-------
+int main(int argc, char **argv)
+{
+    t_game game = {0};
+
+    if (argc != 2)
+    {
+        printf("Usage: %s <config_file>\n", argv[0]);
+        return (1);
+    }
+
+    // Call your parser here (textures, colors, etc.)
+    parse_texture(argv[1], &game);
+    parse_color_str(argv[1], &game);
+    convert_colors(&game);
+
+    // Print the parsed data
+    printf("NO texture path: %s\n", game.input.no_path);
+    printf("SO texture path: %s\n", game.input.so_path);
+    printf("WE texture path: %s\n", game.input.we_path);
+    printf("EA texture path: %s\n", game.input.ea_path);
+    printf("DOOR texture path: %s\n", game.input.door_path);
+
+    printf("Floor color string: %s\n", game.input.f_color);
+    printf("Ceiling color string: %s\n", game.input.c_color);
+    printf("Floor color int: %d\n", game.input.f_color_int);
+    printf("Ceiling color int: %d\n", game.input.c_color_int);
+
+    // Free allocated memory
+    free_input_memory(&game);
+
+    return (0);
 }
+

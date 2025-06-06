@@ -49,15 +49,15 @@ static void	get_texture_path(char *dir, char *line, t_game *game)
 	if (check_texture_filename(tmp))
 		free_and_exit(game, "Error: Invalid texture filename");
 	path = tmp[1];
-	if (dir == "NO")
+	if (strcmp(dir, "NO") == 0)
 		load_text_path(&game->input.no_path, path, "Can't open NO_text", game);
-	else if (dir == "SO")
+	else if (strcmp(dir, "SO") == 0)
 		load_text_path(&game->input.so_path, path, "Can't open SO_text", game);
-	else if (dir == "WE")
+	else if (strcmp(dir, "WE") == 0)
 		load_text_path(&game->input.we_path, path, "Can't open WE_text", game);
-	else if (dir == "EA")
+	else if (strcmp(dir, "EA") == 0)
 		load_text_path(&game->input.ea_path, path, "Can't open EA_text", game);
-	else if (dir == "D")
+	else if (strcmp(dir, "D") == 0)
 		load_text_path(&game->input.door_path, path, "Can't open D_text", game);
 	free(tmp[0]);
 	free(tmp[1]);
@@ -68,7 +68,6 @@ int	parse_texture(char *filename, t_game *game)
 {
 	int		fd;
 	char	*line;
-	int		i;
 
 	fd = open(filename, O_RDONLY);
 	while (1)

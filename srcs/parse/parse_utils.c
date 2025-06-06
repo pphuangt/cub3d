@@ -18,7 +18,7 @@ void	check_malloc(void *ptr, t_game *game)
 		free_and_exit(game, "Error allocating memory");
 }
 
-static void	free_input_memory(t_game *game)
+void	free_input_memory(t_game *game)
 {
 	if (game->input.textures)
 		free(game->input.textures);
@@ -40,7 +40,7 @@ static void	free_input_memory(t_game *game)
 		free(game->input.c_color);
 }
 
-void	free_and_exit(t_game *game, const char *msg) ///
+void	free_and_exit(t_game *game, const char *msg)
 {
 	int	status;
 
@@ -55,7 +55,7 @@ void	free_and_exit(t_game *game, const char *msg) ///
 	exit(status);
 }
 
-char	*skip_texture_lines(int fd, t_game *game)
+char	*skip_texture_lines(int fd)
 {
 	char	*line;
 

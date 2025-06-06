@@ -92,9 +92,6 @@ static int	check_each_tiles_and_set_dir(t_game *game)
 
 void	check_map(t_game *game)
 {
-	int	x;
-	int	y;
-
 	game->input.posx = 0;
 	game->input.posy = 0;
 	game->input.pos_dirctn = 'N';

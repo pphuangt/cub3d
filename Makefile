@@ -7,13 +7,32 @@ CFLAGS = -Wall -Wextra -Werror
 LIBMLX = ./$(LIB)/MLX42
 LIBFT = ./$(LIB)/libft
 PRINTF = ./$(LIB)/ft_printf
+GNL = ./$(LIB)/get_next_line
 
-HEADERS = -I./$(INCLUDE) -I$(LIBMLX)/$(INCLUDE) -I$(LIBFT) -I$(PRINTF)
-LIBS = $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L$(LIBMLX)
+HEADERS = -I./$(INCLUDE) -I$(LIBMLX)/$(INCLUDE) -I$(LIBFT) -I$(PRINTF) -I$(GNL)
+LIBS = $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L$(LIBMLX) 
 
-SRCS_DIR = ./srcs
-SRCS = $(addprefix $(SRCS_DIR)/, main.c hook.c utils.c map.c player.c parse.c)
-OBJS = $(SRCS:.c=.o)
+SRCS =	./srcs/main.c \
+		./srcs/hook.c \
+		./srcs/utils.c \
+		./srcs/map.c \
+		./srcs/player.c \
+		./srcs/parse/check_around.c \
+		./srcs/parse/check_map.c \
+		./srcs/parse/convert_color_to_int.c \
+		./srcs/parse/load_map.c \
+		./srcs/parse/map_info.c \
+		./srcs/parse/name_check.c \
+		./srcs/parse/parse_color_str.c \
+		./srcs/parse/parse_utils.c \
+		./srcs/parse/parse.c \
+		./srcs/parse/texture.c
+OBJS_DIR = objs
+OBJS = $(SRCS:./%.c=$(OBJS_DIR)/%.o)
+
+$(OBJS_DIR)/%.o: ./%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $(HEADERS) $< -o $@
 
 UNAME := $(shell uname)
 ifeq ($(UNAME), Linux)
@@ -38,12 +57,12 @@ $(NAME) : $(OBJS)
 	$(MAKE) -C $(LIBFT)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) $(OS_FLAGS) $(HEADERS)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $(HEADERS) -o $@ $<
+# %.o: %.c
+# 	$(CC) $(CFLAGS) -c $(HEADERS) -o $@ $<
 
 clean:
 	$(MAKE) clean -C $(LIBFT)
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJS_DIR)
 
 fclean: clean
 	$(MAKE) clean -C $(LIBFT)

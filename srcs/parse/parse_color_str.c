@@ -19,14 +19,14 @@ static void	get_color_str(char F_or_C, char *line, t_game *game)
 	tmp = ft_split(line, ' ');
 	if (!tmp || !tmp[0])
 		free_and_exit(game, "Invalid color line");
-	if (tmp[0] == "F")
+	if (F_or_C == 'F')
 	{
 		game->input.f_color = ft_strdup(tmp[1]);
 		if (!game->input.f_color)
 			free_and_exit(game, "Floor color failed");
 		game->input.f_color[ft_strlen(tmp[1]) - 1] = 0;
 	}
-	else if (tmp[0] == "C")
+	else if (F_or_C == 'C')
 	{
 		game->input.c_color = ft_strdup(tmp[1]);
 		if (!game->input.c_color)
@@ -42,7 +42,6 @@ int	parse_color_str(char *filename, t_game *game)
 {
 	int		fd;
 	char	*line;
-	char	**tmp;
 
 	fd = open(filename, O_RDONLY);
 	while (1)

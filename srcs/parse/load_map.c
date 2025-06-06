@@ -36,7 +36,7 @@ static void	fill_map(char *filename, t_game *game)
 	char	*tmp;
 
 	fd = open(filename, O_RDONLY);
-	line = skip_texture_lines(fd, game);
+	line = skip_texture_lines(fd);
 	while (1)
 	{
 		tmp = line;
@@ -55,7 +55,6 @@ static void	fill_map(char *filename, t_game *game)
 			break ;
 	}
 	close(fd);
-	return (0);
 }
 
 void	load_and_validate_map(char *filename, t_game *game)

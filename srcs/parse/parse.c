@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static int	open_map_file(char *filename, t_game *game)
+static void	open_map_file(char *filename, t_game *game)
 {
 	int	fd;
 
@@ -41,16 +41,15 @@ static void	verify_start_position(t_game *game)
 void	parse_map_file(char *filename, t_game *game)
 {
 	open_map_file(filename, game);
-	check_map_filename(filename);
+	check_map_filename(filename, game);
 	allocate_texture(game);
 	if (parse_texture(filename, game))
 		free_and_exit(game, "Error parsing textures\n");
-	if (parse_color(filename, game))
+	if (parse_color_str(filename, game))
 		free_and_exit(game, "Error parsing colors\n");
 	convert_colors(game);
 	get_map_info(filename, game);
 	allocate_map_memory(game);
 	load_and_validate_map(filename, game);
 	verify_start_position(game);
-	return (0);
 }

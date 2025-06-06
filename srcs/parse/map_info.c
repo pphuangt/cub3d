@@ -14,7 +14,7 @@
 
 int	line_nok(char *line, t_game *game)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (line[i])
@@ -37,7 +37,7 @@ void	get_map_info(char *filename, t_game *game)
 	char	*temp;
 
 	fd = open(filename, O_RDONLY);
-	line = skip_texture_lines(fd, game);
+	line = skip_texture_lines(fd);
 	while (1)
 	{
 		temp = line;
@@ -47,7 +47,7 @@ void	get_map_info(char *filename, t_game *game)
 		{
 			close(fd);
 			free(line);
-			free_and_exit(game, "Error: Invalid map line");
+			free_and_exit(game, "Invalid map line");
 		}
 		free(line);
 		game->input.row_count++;
@@ -56,5 +56,4 @@ void	get_map_info(char *filename, t_game *game)
 			break ;
 	}
 	close(fd);
-	return (0);
 }

@@ -25,13 +25,10 @@ static int	check_filename_cub(char *filename)
 	return (-1);
 }
 
-void	check_map_filename(char *filename)
+void	check_map_filename(char *filename, t_game *game)
 {
 	if (check_filename_cub(filename) != 0)
-	{
-		ft_printf(stderr, "Error: Invalid filename (has to end with .cub)\n");
-		exit(EXIT_FAILURE);
-	}
+		free_and_exit(game, "Invalid map filename: must end with .cub");
 }
 
 int	check_texture_filename(char **splitted_text_path)
@@ -41,4 +38,5 @@ int	check_texture_filename(char **splitted_text_path)
 	len = ft_strlen(splitted_text_path[1]);
 	if (len < 4 || ft_strncmp(splitted_text_path[1] + len - 4, ".xpm", 4) != 0)
 		return (1);
+	return (0);
 }
