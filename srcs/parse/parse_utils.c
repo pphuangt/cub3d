@@ -20,8 +20,6 @@ void	check_malloc(void *ptr, t_game *game)
 
 void	free_input_memory(t_game *game)
 {
-	if (game->input.textures)
-		free(game->input.textures);
 	if (game->input.map)
 		free(game->input.map);
 	if (game->input.no_path)
