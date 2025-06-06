@@ -48,7 +48,7 @@ static t_ray	vert_wall_hit(double xintercept, double yintercept,
 	while (map_is_inside(next_touch_x, next_touch_y))
 	{
 		if (map_has_wall_at(next_touch_x - (xstep < 0), next_touch_y))
-			return ((t_ray){0, next_touch_x, next_touch_y, 0, true, true});
+			return ((t_ray){0, next_touch_x, next_touch_y, 0, 0, true, true});
 		next_touch_x += xstep;
 		next_touch_y += ystep;
 	}

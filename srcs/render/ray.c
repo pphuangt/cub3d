@@ -86,5 +86,7 @@ static void	cast_ray(t_game *game, double ray_angle, int strip_id)
 		game->rays[strip_id] = vertical;
 	else
 		game->rays[strip_id] = horizontal;
+	game->rays[strip_id].texture_id = ray_texture_id(ray_angle,
+			game->rays[strip_id].was_hit_vertical);
 	game->rays[strip_id].angle = ray_angle;
 }

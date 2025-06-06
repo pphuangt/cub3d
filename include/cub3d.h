@@ -69,6 +69,7 @@ typedef struct s_ray
 	double	x;
 	double	y;
 	double	distance;
+	int		texture_id;
 	bool	found_wall_hit;
 	bool	was_hit_vertical;
 }	t_ray;
@@ -108,6 +109,7 @@ bool	ray_facing_down(double angle);
 bool	ray_facing_up(double angle);
 bool	ray_facing_right(double angle);
 bool	ray_facing_left(double angle);
+int		ray_texture_id(double angle, bool is_vertical_hit);
 
 void	rect(int x, int y, int w, int h);
 void	line(int x1, int y1, int x2, int y2);
