@@ -6,10 +6,9 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIBMLX = ./$(LIB)/MLX42
 LIBFT = ./$(LIB)/libft
-PRINTF = ./$(LIB)/ft_printf
 GNL = ./$(LIB)/get_next_line
 
-HEADERS = -I./$(INCLUDE) -I$(LIBMLX)/$(INCLUDE) -I$(LIBFT) -I$(PRINTF) -I$(GNL)
+HEADERS = -I./$(INCLUDE) -I$(LIBMLX)/$(INCLUDE) -I$(LIBFT) -I$(GNL)
 LIBS = $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L$(LIBMLX) 
 
 SRCS =	./srcs/main.c \
@@ -57,7 +56,6 @@ libmlx:
 
 $(NAME) : $(OBJS)
 	$(MAKE) -C $(LIBFT)
-	$(MAKE) -C $(PRINTF)
 	$(MAKE) -C $(GNL)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) $(OS_FLAGS) $(HEADERS)
 

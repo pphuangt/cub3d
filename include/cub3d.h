@@ -22,7 +22,6 @@
 # include "MLX42/MLX42.h"
 # include "libft.h"
 # include "get_next_line.h"
-# include "ft_printf.h"
 # include <math.h>
 # include "constants.h"
 # include "fcntl.h"
