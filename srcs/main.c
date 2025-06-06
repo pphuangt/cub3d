@@ -88,7 +88,6 @@ int main(int argc, char **argv)
     printf("SO texture path: %s\n", game.input.so_path);
     printf("WE texture path: %s\n", game.input.we_path);
     printf("EA texture path: %s\n", game.input.ea_path);
-
     printf("Floor color string: %s\n", game.input.f_color);
     printf("Ceiling color string: %s\n", game.input.c_color);
     printf("Floor color int: %d\n", game.input.f_color_int);

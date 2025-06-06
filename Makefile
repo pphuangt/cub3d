@@ -64,11 +64,13 @@ $(NAME) : $(OBJS)
 
 clean:
 	$(MAKE) clean -C $(LIBFT)
+	$(MAKE) clean -C $(GNL)
 	@rm -rf $(OBJS_DIR)
 
 fclean: clean
 	$(MAKE) clean -C $(LIBFT)
 	@rm -f $(LIBFT)/libft.a
+	@rm -f $(GNL)/get_next_line.a
 	@rm -rf $(LIBMLX)/build
 	@rm -f $(NAME)
 

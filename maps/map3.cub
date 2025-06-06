@@ -1,0 +1,16 @@
+NO ./srcs/images/colorstone.png
+SO ./srcs/images/graystone.png
+WE ./srcs/images/mossystone.png
+EA ./srcs/images/redbrick.png
+
+F 220,100,0
+C 225,30,0
+
+
+111111111111111111
+100000000000000001
+100000000002000001
+1000100000000000W1
+100000000000000001
+100000000000000001
+111111111111111111

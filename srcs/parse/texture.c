@@ -35,9 +35,9 @@ static void	get_texture_path(char *dir, char *line, t_game *game)
 
 	tmp = ft_split(line, ' ');
 	if (!tmp || !tmp[1])
-		free_and_exit(game, "Error: Invalid texture path");
-	if (check_texture_filename(tmp))
-		free_and_exit(game, "Error: Invalid texture filename");
+		free_and_exit(game, "Invalid texture path");
+	if (check_texture_filename(tmp, game))
+		free_and_exit(game, "Invalid texture filename");
 	path = tmp[1];
 	if (strcmp(dir, "NO") == 0)
 		load_text_path(&game->input.no_path, path, "Can't open NO_text", game);
