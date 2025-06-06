@@ -23,6 +23,7 @@
 # include "MLX42/MLX42.h"
 # include "libft.h"
 # include "constants.h"
+# include <fcntl.h>
 
 # define TITLE "cub3d"
 # define PI 3.14159265
@@ -34,6 +35,7 @@
 # define TILE_SIZE 64
 # define PLAYER_WALL_GAP 8
 # define PLAYER_POINT 3
+# define TEXTURE_COUNT 4
 
 typedef struct s_graphic
 {
@@ -74,12 +76,31 @@ typedef struct s_ray
 	bool	was_hit_vertical;
 }	t_ray;
 
+typedef struct s_input
+{
+	char		*map;
+	size_t		row_count;
+	size_t		col_count;
+	int			posx;
+	int			posy;
+	char		pos_dirctn;
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+	char		*f_color;
+	char		*c_color;
+	int			f_color_int;
+	int			c_color_int;
+}	t_input;
+
 typedef struct s_game
 {
 	t_graphic	graphic;
 	t_map		map;
 	t_player	player;
 	t_ray		*rays;
+	t_input		input;
 	double		dist_proj_plane;
 	double		delta_time;
 }	t_game;
@@ -120,6 +141,26 @@ void	border(int32_t color);
 void	normalize_angle(double *angle);
 double	distance_between_points(double x1, double y1, double x2, double y2);
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+
+void	parse_map_file(char *in_file, t_game *game);
+void	check_map_filename(char *filename, t_game *game);
+int		parse_texture(char *filename, t_game *game);
+int		check_texture_filename(char **splitted_text_path, t_game *game);
+int		parse_color_str(char *filename, t_game *game);
+void	convert_colors(t_game *game);
+void	get_map_info(char *filename, t_game *game);
+void	load_and_validate_map(char *filename, t_game *game);
+void    check_map(t_game *game);
+void	check_udr(t_game *game, int x, int y);
+void	check_udl(t_game *game, int x, int y);
+void	check_dlr(t_game *game, int x, int y);
+void	check_ulr(t_game *game, int x, int y);
+void	check_udlr(t_game *game, int x, int y);
+
+void	check_malloc(void *ptr, t_game *game);
+void	free_input_memory(t_game *game);
+void	free_and_exit(t_game *game, const char *msg);
+char	*skip_texture_lines(int fd);
 
 void	ft_error(t_game *game);
 

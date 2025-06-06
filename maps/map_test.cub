@@ -1,0 +1,14 @@
+NO ./images/colorstone.png
+SO ./images/graystone.png
+WE ./images/mossystone.png
+EA ./images/redbrick.png
+
+C 0,50,120
+F 100,100,100
+
+
+11111111
+10000001
+1000N021
+10000001
+11112111
