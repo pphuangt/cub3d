@@ -26,10 +26,10 @@ void	setup_map(t_game *game)
 	map->row = (int)input->row_count;
 	map->width = TILE_SIZE * map->col;
 	map->height = TILE_SIZE * map->row;
-	map->textures[0] = mlx_load_png(input->no_path);
-	map->textures[1] = mlx_load_png(input->so_path);
-	map->textures[2] = mlx_load_png(input->we_path);
-	map->textures[3] = mlx_load_png(input->ea_path);
+	map->textures[NORTH] = mlx_load_png(input->no_path);
+	map->textures[SOUTH] = mlx_load_png(input->so_path);
+	map->textures[EAST] = mlx_load_png(input->we_path);
+	map->textures[WEST] = mlx_load_png(input->ea_path);
 	if (!map->textures[0] || !map->textures[1]
 		|| !map->textures[2] || !map->textures[3])
 		ft_error(game);

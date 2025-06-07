@@ -37,13 +37,10 @@ int	ray_texture_id(double angle, bool is_vertical_hit)
 	if (!is_vertical_hit)
 	{
 		if (ray_facing_up(angle))
-			return (0);
-		return (1);
+			return (SOUTH);
+		return (NORTH);
 	}
-	else
-	{
 		if (ray_facing_left(angle))
-			return (2);
-		return (3);
-	}
+			return (EAST);
+		return (WEST);
 }

@@ -37,7 +37,7 @@
 # define PLAYER_WALL_GAP 8
 # define PLAYER_POINT 3
 # define TEXTURE_COUNT 4
-# define MINIMAP_SCALE 1
+# define MINIMAP_SCALE 0.2
 # define RADIUS 8
 
 typedef struct s_graphic
@@ -107,6 +107,14 @@ typedef struct s_game
 	double		dist_proj_plane;
 	double		delta_time;
 }	t_game;
+
+typedef enum e_direction
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+}	t_direction;
 
 void	setup_map(t_game *game);
 void	setup_player(t_game *game);
