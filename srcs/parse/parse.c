@@ -55,5 +55,6 @@ void	parse_map_file(char *filename, t_game *game)
 
 void	parse(char *filename, t_game *game)
 {
+	ft_memset(&game->input, 0, sizeof(game->input));
 	parse_map_file(filename, game);
 }

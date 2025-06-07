@@ -14,6 +14,19 @@
 
 static bool	map_collision(t_map *map, double x, double y, int operation);
 
+void	print_wall(t_map *map)
+{
+	printf("row, cow = %d, %d\n", map->row, map->col);
+	for (int y = 0; y < map->row; y++)
+	{
+		for (int x = 0; x < map->col; x++)
+		{
+			printf("|%c|", map->wall[y * map->col + x]);
+		}
+		printf("\n");
+	}
+}
+
 void	setup_map(t_game *game)
 {
 	t_map		*map;
@@ -27,6 +40,7 @@ void	setup_map(t_game *game)
 	map->width = TILE_SIZE * map->col;
 	map->height = TILE_SIZE * map->row;
 	map_collision(map, 0, 0, 0);
+	print_wall(map);
 	map->textures[0] = mlx_load_png(input->no_path);
 	map->textures[1] = mlx_load_png(input->so_path);
 	map->textures[2] = mlx_load_png(input->we_path);
@@ -50,7 +64,7 @@ void	render_map(t_game *game)
 		x = 0;
 		while (x < map->col)
 		{
-			if (map->wall[y * map->col + x] == 1)
+			if (map->wall[y * map->col + x] == '1')
 				color(BLACK);
 			else
 				color(WHITE);
@@ -94,5 +108,5 @@ static bool	map_collision(t_map *map, double x, double y, int operation)
 		return (true);
 	index_x = floor(x / TILE_SIZE);
 	index_y = floor(y / TILE_SIZE);
-	return (map->wall[index_y * map->col + index_x] != 0);
+	return (map->wall[index_y * map->col + index_x] != '0');
 }

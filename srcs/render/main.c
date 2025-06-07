@@ -38,17 +38,17 @@ void	update(void *param)
 
 	game = (t_game *)param;
 	game->delta_time = game->graphic.window->delta_time;
-	update_player(game);
-	cast_rays(game);
+	//update_player(game);
+	//cast_rays(game);
 	render(game);
 }
 
 static void	render(t_game *game)
 {
-	render_wall(game);
+	//render_wall(game);
 	render_map(game);
 	render_player(game);
-	render_ray(game);
+	//render_ray(game);
 }
 
 static void	setup(t_game *game)

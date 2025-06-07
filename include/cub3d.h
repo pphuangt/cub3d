@@ -37,7 +37,7 @@
 # define PLAYER_WALL_GAP 8
 # define PLAYER_POINT 3
 # define TEXTURE_COUNT 4
-# define MINIMAP_SCALE 0.2
+# define MINIMAP_SCALE 1
 # define RADIUS 8
 
 typedef struct s_graphic
