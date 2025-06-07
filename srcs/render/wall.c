@@ -63,29 +63,30 @@ static void	render_projection_wall(t_game *game, int width)
 static void	draw_wall_texture(t_game *game, mlx_texture_t *texture,
 	double wall_height, int i)
 {
-	int				texture_offset_x;
-	int				texture_offset_y;
+	int				offset_x;
+	int				offset_y;
 	int				wall_top_y;
 	int				wall_bottom_y;
 
 	if (game->rays[i].was_hit_vertical)
-		texture_offset_x = (int) game->rays[i].y % TILE_SIZE;
+		offset_x = (int) game->rays[i].y % TILE_SIZE;
 	else
-		texture_offset_x = (int) game->rays[i].x % TILE_SIZE;
+		offset_x = (int) game->rays[i].x % TILE_SIZE;
+	if (game->rays[i].was_hit_vertical && ray_facing_left(game->rays[i].angle))
+		offset_x = TILE_SIZE - offset_x - 1;
+	if (!game->rays[i].was_hit_vertical && ray_facing_down(game->rays[i].angle))
+		offset_x = TILE_SIZE - offset_x - 1;
 	wall_top_y = (game->map.height / 2) - (wall_height / 2);
-	if (wall_top_y < 0)
-		wall_top_y = 0;
+	wall_top_y *= (wall_top_y > 0);
 	wall_bottom_y = (game->map.height / 2) + (wall_height / 2);
 	if (wall_bottom_y > game->map.height)
 		wall_bottom_y = game->map.height;
 	while (wall_top_y < wall_bottom_y)
 	{
-		texture_offset_y = (wall_top_y + (wall_height / 2)
-				- (game->map.height / 2))
+		offset_y = (wall_top_y + (wall_height / 2) - (game->map.height / 2))
 			* ((float)texture->height / wall_height);
-		mlx_put_pixel(game->graphic.img, i, wall_top_y,
-			texture_pixel_color(texture, texture_offset_x, texture_offset_y));
-		wall_top_y++;
+		mlx_put_pixel(game->graphic.img, i, wall_top_y++,
+			texture_pixel_color(texture, offset_x, offset_y));
 	}
 }
 

@@ -33,7 +33,7 @@ void	ft_error(t_game *game)
 {
 	ft_putendl_fd("Error\n", STDERR_FILENO);
 	ft_putendl_fd((char *)mlx_strerror(mlx_errno), STDERR_FILENO);
-	terminate(game);
+	free_input_memory(game);
 	mlx_terminate(game->graphic.window);
 	exit(EXIT_FAILURE);
 }

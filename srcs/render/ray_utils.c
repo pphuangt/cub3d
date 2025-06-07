@@ -40,7 +40,7 @@ int	ray_texture_id(double angle, bool is_vertical_hit)
 			return (SOUTH);
 		return (NORTH);
 	}
-		if (ray_facing_left(angle))
-			return (EAST);
+	if (ray_facing_left(angle))
 		return (WEST);
+	return (EAST);
 }

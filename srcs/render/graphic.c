@@ -33,4 +33,5 @@ void	setup_graphic(t_game *game)
 void	terminate(t_game *game)
 {
 	mlx_close_window(game->graphic.window);
+	free_input_memory(game);
 }
