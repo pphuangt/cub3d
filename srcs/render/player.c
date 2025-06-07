@@ -22,8 +22,8 @@ void	setup_player(t_game	*game)
 
 	player = &game->player;
 	input = &game->input;
-	player->x = input->posx * TILE_SIZE - TILE_SIZE / 2;
-	player->y = input->posy * TILE_SIZE - TILE_SIZE / 2;
+	player->x = (input->posx + 1) * TILE_SIZE - TILE_SIZE / 2;
+	player->y = (input->posy + 1) * TILE_SIZE - TILE_SIZE / 2;
 	player->move_direction = 0;
 	player->strafe_direction = 0;
 	player->turn_direction = 0;
