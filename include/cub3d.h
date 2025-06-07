@@ -157,8 +157,6 @@ void	load_and_validate_map(char *filename, t_game *game);
 void    check_map(t_game *game);
 void	check_udr(t_game *game, int x, int y);
 void	check_udl(t_game *game, int x, int y);
-void	check_dlr(t_game *game, int x, int y);
-void	check_ulr(t_game *game, int x, int y);
 void	check_udlr(t_game *game, int x, int y);
 
 void	check_malloc(void *ptr, t_game *game);

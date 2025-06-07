@@ -19,7 +19,7 @@ int	line_nok(char *line, t_game *game)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != '0' && line[i] != '1' && line[i] != '2'
+		if (line[i] != '0' && line[i] != '1'
 			&& line[i] != 'N' && line[i] != 'S' && line[i] != 'W'
 			&& line[i] != 'E' && line[i] != ' ')
 			return (1);

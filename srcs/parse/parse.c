@@ -55,7 +55,5 @@ void	parse_map_file(char *filename, t_game *game)
 
 void	parse(char *filename, t_game *game)
 {
-	parse_texture(filename, game);
-	parse_color_str(filename, game);
-	convert_colors(game);
+	parse_map_file(filename, game);
 }

@@ -56,15 +56,15 @@ static int	check_rgb_value(char *color_str, t_game *game)
 		if (value < 0 || value > 255)
 		{
 			while (i < 3)
-			{
-				free(tmp[i]);
-				i++;
-			}
+				free(tmp[i++]);
 			free(tmp);
 			return (1);
 		}
 		i++;
 	}
+	i = 0;
+	while (i < 3)
+		free(tmp[i++]);
 	free(tmp);
 	return (0);
 }
