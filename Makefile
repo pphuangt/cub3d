@@ -6,14 +6,20 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIBMLX = ./$(LIB)/MLX42
 LIBFT = ./$(LIB)/libft
+GNL = ./$(LIB)/get_next_line
 
-HEADERS = -I./$(INCLUDE) -I$(LIBMLX)/$(INCLUDE) -I$(LIBFT)
-LIBS = $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L$(LIBMLX)
+HEADERS = -I./$(INCLUDE) -I$(LIBMLX)/$(INCLUDE) -I$(LIBFT) -I$(GNL)
+LIBS = $(LIBFT)/libft.a $(GNL)/get_next_line.a $(LIBMLX)/build/libmlx42.a -L$(LIBMLX)
 
 SRCS_DIR = ./srcs
 RENDER_DIR = $(SRCS_DIR)/render
-SRCS = $(addprefix $(RENDER_DIR)/, main.c hook.c map.c player.c graphic.c ray.c ray_horizontal.c ray_vertical.c ray_utils.c wall.c utils.c) \
-		$(addprefix $(RENDER_DIR)/draw/, draw.c rect.c line.c circle.c color.c)
+PARSE_DIR = $(SRCS_DIR)/parse
+SRCS = $(addprefix $(RENDER_DIR)/, main.c hook.c map.c player.c graphic.c\
+			ray.c ray_horizontal.c ray_vertical.c ray_utils.c wall.c utils.c) \
+		$(addprefix $(RENDER_DIR)/draw/, draw.c rect.c line.c circle.c color.c) \
+		$(addprefix $(PARSE_DIR)/, check_around.c check_map.c\
+			convert_color_to_int.c load_map.c map_info.c name_check.c parse.c\
+			parse_color_str.c parse_utils.c texture.c)
 OBJS = $(SRCS:.c=.o)
 
 UNAME := $(shell uname)
@@ -31,6 +37,7 @@ libmlx:
 
 $(NAME) : $(OBJS)
 	$(MAKE) -C $(LIBFT)
+	$(MAKE) -C $(GNL)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) $(OS_FLAGS) $(HEADERS)
 
 %.o: %.c
@@ -38,11 +45,15 @@ $(NAME) : $(OBJS)
 
 clean:
 	$(MAKE) clean -C $(LIBFT)
+	$(MAKE) clean -C $(GNL)
 	@rm -rf $(OBJS)
 
-fclean: clean
+fclean:
 	$(MAKE) clean -C $(LIBFT)
+	$(MAKE) clean -C $(GNL)
+	@rm -rf $(OBJS)
 	@rm -f $(LIBFT)/libft.a
+	@rm -f $(GNL)/get_next_line.a
 	@rm -rf $(LIBMLX)/build
 	@rm -f $(NAME)
 

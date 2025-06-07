@@ -18,15 +18,23 @@ static void	set_player_position(t_player *player, double new_x, double new_y);
 void	setup_player(t_game	*game)
 {
 	t_player	*player;
+	t_input		*input;
 
 	player = &game->player;
-	player->x = POSX * TILE_SIZE - TILE_SIZE / 2;
-	player->y = POSY * TILE_SIZE - TILE_SIZE / 2;
+	input = &game->input;
+	player->x = input->posx * TILE_SIZE - TILE_SIZE / 2;
+	player->y = input->posy * TILE_SIZE - TILE_SIZE / 2;
 	player->move_direction = 0;
 	player->strafe_direction = 0;
 	player->turn_direction = 0;
-	player->rotation_angle = M_PI / 2;
-	player->move_speed = 100;
+	player->rotation_angle = M_PI * 2 / 3;
+	if (input->pos_dirctn == 'S')
+		player->rotation_angle = PI_2;
+	if (input->pos_dirctn == 'W')
+		player->rotation_angle = PI;
+	if (input->pos_dirctn == 'E')
+		player->rotation_angle = 0;
+	player->move_speed = 60;
 	player->turn_speed = 60 * (M_PI / 180);
 }
 

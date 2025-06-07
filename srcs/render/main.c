@@ -16,10 +16,17 @@ static void	setup(t_game *game);
 static void	run(t_game *game);
 static void	render(t_game *game);
 
-int32_t	main(void)
+int32_t	main(int argc, char **argv)
 {
 	t_game	game;
 
+	if (argc != 2)
+	{
+		ft_putendl_fd("Error", STDERR_FILENO);
+		ft_putendl_fd("Usage: ./cub3d <map file>", STDERR_FILENO);
+		return (EXIT_FAILURE);
+	}
+	parse(argv[1], &game);
 	setup(&game);
 	run(&game);
 	return (EXIT_SUCCESS);

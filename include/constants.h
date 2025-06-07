@@ -20,15 +20,4 @@
 # define BLACK 0x000000FF
 # define WHITE 0xFFFFFFFF
 
-/* map */
-# define COL 15
-# define ROW 12
-# define MINIMAP_SCALE 0.2
-
-/* player */
-# define POSX 8
-# define POSY 6
-# define RADIUS 8
-# define ROTATE_ANGLE
-
 #endif

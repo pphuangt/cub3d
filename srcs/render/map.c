@@ -14,35 +14,23 @@
 
 static bool	map_collision(t_map *map, double x, double y, int operation);
 
-int	g_wall[ROW][COL] = {
-{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-{1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1},
-{1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-{1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1},
-{1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-{1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
-{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-};
-
 void	setup_map(t_game *game)
 {
 	t_map		*map;
+	t_input		*input;
 
 	map = &game->map;
-	map->col = COL;
-	map->row = ROW;
-	map->width = TILE_SIZE * COL;
-	map->height = TILE_SIZE * ROW;
+	input = &game->input;
+	map->wall = input->map;
+	map->col = (int)input->col_count;
+	map->row = (int)input->row_count;
+	map->width = TILE_SIZE * map->col;
+	map->height = TILE_SIZE * map->row;
 	map_collision(map, 0, 0, 0);
-	map->textures[0] = mlx_load_png("./images/colorstone.png");
-	map->textures[1] = mlx_load_png("./images/graystone.png");
-	map->textures[2] = mlx_load_png("./images/mossystone.png");
-	map->textures[3] = mlx_load_png("./images/redbrick.png");
+	map->textures[0] = mlx_load_png(input->no_path);
+	map->textures[1] = mlx_load_png(input->so_path);
+	map->textures[2] = mlx_load_png(input->we_path);
+	map->textures[3] = mlx_load_png(input->ea_path);
 	if (!map->textures[0] || !map->textures[1]
 		|| !map->textures[2] || !map->textures[3])
 		ft_error(game);
@@ -50,18 +38,19 @@ void	setup_map(t_game *game)
 
 void	render_map(t_game *game)
 {
+	t_map	*map;
 	int		x;
 	int		y;
 
-	(void)game;
+	map = &game->map;
 	y = 0;
 	border(BLACK);
-	while (y < ROW)
+	while (y < map->row)
 	{
 		x = 0;
-		while (x < COL)
+		while (x < map->col)
 		{
-			if (g_wall[y][x] == 1)
+			if (map->wall[y * map->col + x] == 1)
 				color(BLACK);
 			else
 				color(WHITE);
@@ -105,5 +94,5 @@ static bool	map_collision(t_map *map, double x, double y, int operation)
 		return (true);
 	index_x = floor(x / TILE_SIZE);
 	index_y = floor(y / TILE_SIZE);
-	return (g_wall[index_y][index_x] != 0);
+	return (map->wall[index_y * map->col + index_x] != 0);
 }

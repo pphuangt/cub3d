@@ -22,6 +22,7 @@
 # include <math.h>
 # include "MLX42/MLX42.h"
 # include "libft.h"
+# include "get_next_line.h"
 # include "constants.h"
 # include <fcntl.h>
 
@@ -36,6 +37,8 @@
 # define PLAYER_WALL_GAP 8
 # define PLAYER_POINT 3
 # define TEXTURE_COUNT 4
+# define MINIMAP_SCALE 0.2
+# define RADIUS 8
 
 typedef struct s_graphic
 {
@@ -45,7 +48,7 @@ typedef struct s_graphic
 
 typedef struct s_map
 {
-	int				**wall;
+	char			*wall;
 	int				col;
 	int				row;
 	int				width;
@@ -142,6 +145,7 @@ void	normalize_angle(double *angle);
 double	distance_between_points(double x1, double y1, double x2, double y2);
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
+void	parse(char *filename, t_game *game);
 void	parse_map_file(char *in_file, t_game *game);
 void	check_map_filename(char *filename, t_game *game);
 int		parse_texture(char *filename, t_game *game);

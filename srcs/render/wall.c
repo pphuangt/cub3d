@@ -12,29 +12,32 @@
 
 #include "cub3d.h"
 
-static void				render_ceil_floor(int width, int height);
-static void				render_projection_wall(t_game *game, int width);
-static void				draw_wall_texture(t_game *game, mlx_texture_t *texture,
-							double wall_height, int i);
-static int32_t			texture_pixel_color(mlx_texture_t *texture,
-							int texture_offset_x, int texture_offset_y);
+static void		render_ceil_floor(int width, int height,
+					int32_t floor_color, int32_t ceil_color);
+static void		render_projection_wall(t_game *game, int width);
+static void		draw_wall_texture(t_game *game, mlx_texture_t *texture,
+					double wall_height, int i);
+static int32_t	texture_pixel_color(mlx_texture_t *texture,
+					int texture_offset_x, int texture_offset_y);
 
 void	render_wall(t_game *game)
 {
 	t_map	*map;
 
 	map = &game->map;
-	render_ceil_floor(map->width, map->height);
+	render_ceil_floor(map->width, map->height,
+		game->input.f_color_int, game->input.f_color_int);
 	render_projection_wall(game, map->width);
 }
 
-static void	render_ceil_floor(int width, int height)
+static void	render_ceil_floor(int width, int height,
+	int32_t floor_color, int32_t ceil_color)
 {
-	border(BLUE);
-	color(BLUE);
+	border(ceil_color);
+	color(ceil_color);
 	rect(0, 0, width, height / 2);
-	border(GREY);
-	color(GREY);
+	border(floor_color);
+	color(floor_color);
 	rect(0, height / 2, width, height / 2);
 }
 

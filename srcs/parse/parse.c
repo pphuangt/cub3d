@@ -52,3 +52,10 @@ void	parse_map_file(char *filename, t_game *game)
 	load_and_validate_map(filename, game);
 	verify_start_position(game);
 }
+
+void	parse(char *filename, t_game *game)
+{
+	parse_texture(filename, game);
+	parse_color_str(filename, game);
+	convert_colors(game);
+}
