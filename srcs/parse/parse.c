@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@student.42.fr>           #+#  +:+       +#+       */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-05-20 08:03:57 by plesukja            #+#    #+#           */
-/*   Updated: 2025-05-20 08:03:57 by plesukja            ###   ########.fr    */
+/*   Created: 2025/05/20 08:03:57 by plesukja          #+#    #+#             */
+/*   Updated: 2025/06/07 11:44:54 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	parse_map_file(char *filename, t_game *game)
 		free_and_exit(game, "Error parsing colors\n");
 	convert_colors(game);
 	get_map_info(filename, game);
+	printf("get_map_info: row_count = %zu, col_count = %zu\n",
+		game->input.row_count, game->input.col_count);
 	allocate_map_memory(game);
 	load_and_validate_map(filename, game);
 	verify_start_position(game);

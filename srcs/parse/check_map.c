@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hg <hg@student.42.fr>                      #+#  +:+       +#+        */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-06-04 07:09:03 by hg                #+#    #+#             */
-/*   Updated: 2025-06-04 07:09:03 by hg               ###   ########.fr       */
+/*   Created: 2025/06/04 07:09:03 by hg                #+#    #+#             */
+/*   Updated: 2025/06/07 11:12:55 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,24 @@ static int	check_top_bottom_walls(t_game *game)
 	i = 0;
 	while (i < game->input.col_count)
 	{
-		if (game->input.map[i] != '1' || game->input.map[i] != ' ')
+		if (game->input.map[i] != '1' && game->input.map[i] != ' ')
+		{
+			printf("Invalid top wall at index %zu: '%c'\n",
+				i, game->input.map[i]);
 			return (-1);
+		}
 		i++;
 	}
 	i = 0;
 	while (i < game->input.col_count)
 	{
 		if (game->input.map[i + ((row_cnt - 1) * col_cnt)] != '1'
-			|| game->input.map[i + ((row_cnt - 1) * col_cnt)] != ' ')
+			&& game->input.map[i + ((row_cnt - 1) * col_cnt)] != ' ')
+		{
+			printf("Invalid bottom wall at index %zu: '%c'\n",
+				i + ((row_cnt - 1) * col_cnt), game->input.map[i + ((row_cnt - 1) * col_cnt)]);
 			return (-1);
+		}
 		i++;
 	}
 	return (0);
@@ -44,10 +52,10 @@ static void	check_around_tiles(t_game *game, size_t x, size_t y)
 		check_udr(game, x, y);
 	else if (x == game->input.col_count - 1)
 		check_udl(game, x, y);
-	else if (y == 0)
-		check_dlr(game, x, y);
-	else if (y == game->input.row_count - 1)
-		check_ulr(game, x, y);
+	// else if (y == 0)
+	// 	check_dlr(game, x, y);
+	// else if (y == game->input.row_count - 1)
+	// 	check_ulr(game, x, y);
 	else
 		check_udlr(game, x, y);
 }
@@ -78,15 +86,14 @@ static int	check_each_tiles_and_set_dir(t_game *game)
 				|| game->input.map[x + (y * game->input.col_count)] == 'W'
 				|| game->input.map[x + (y * game->input.col_count)] == 'E')
 				set_start_pos(game, x, y);
-			else if (game->input.map[x + (y * game->input.col_count)] == '0'
-				|| game->input.map[x + (y * game->input.col_count)] == '2')
+			else
 				check_around_tiles(game, x, y);
 			x++;
 		}
 		y++;
 	}
-	if (game->input.pos_dirctn == 'N')
-		return (-1);
+	// if (game->input.pos_dirctn == 'N')
+	// 	return (-1);
 	return (0);
 }
 

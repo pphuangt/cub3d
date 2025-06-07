@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pphuangt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:29:35 by pphuangt          #+#    #+#             */
-/*   Updated: 2025/05/05 13:29:37 by pphuangt         ###   ########.fr       */
+/*   Updated: 2025/06/07 10:36:46 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void	load_and_validate_map(char *filename, t_game *game);
 void    check_map(t_game *game);
 void	check_udr(t_game *game, int x, int y);
 void	check_udl(t_game *game, int x, int y);
-void	check_dlr(t_game *game, int x, int y);
-void	check_ulr(t_game *game, int x, int y);
+// void	check_dlr(t_game *game, int x, int y);
+// void	check_ulr(t_game *game, int x, int y);
 void	check_udlr(t_game *game, int x, int y);
 
 void	check_malloc(void *ptr, t_game *game);

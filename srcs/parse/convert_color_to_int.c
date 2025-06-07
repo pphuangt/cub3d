@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   convert_color_to_int.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hg <hg@student.42.fr>                      #+#  +:+       +#+        */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-06-03 05:49:33 by hg                #+#    #+#             */
-/*   Updated: 2025-06-03 05:49:33 by hg               ###   ########.fr       */
+/*   Created: 2025/06/03 05:49:33 by hg                #+#    #+#             */
+/*   Updated: 2025/06/07 11:35:05 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ static int	check_rgb_value(char *color_str, t_game *game)
 		if (value < 0 || value > 255)
 		{
 			while (i < 3)
-			{
-				free(tmp[i]);
-				i++;
-			}
+				free(tmp[i++]);
 			free(tmp);
 			return (1);
 		}
 		i++;
 	}
+	i = 0;
+	while (i < 3)
+		free(tmp[i++]);
 	free(tmp);
 	return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_map                                           :+:      :+:    :+:   */
+/*   load_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hg <hg@student.42.fr>                      #+#  +:+       +#+        */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-06-03 07:24:36 by hg                #+#    #+#             */
-/*   Updated: 2025-06-03 07:24:36 by hg               ###   ########.fr       */
+/*   Created: 2025/06/03 07:24:36 by hg                #+#    #+#             */
+/*   Updated: 2025/06/07 11:45:29 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,13 @@ static void	fill_map(char *filename, t_game *game)
 void	load_and_validate_map(char *filename, t_game *game)
 {
 	fill_map(filename, game);
+	for (size_t y = 0; y < game->input.row_count; y++)
+	{
+		for (size_t x = 0; x < game->input.col_count; x++)
+		{
+			printf("%c", game->input.map[x + (y * game->input.col_count)]);
+		}
+		printf("\n");
+	}
 	check_map(game);
 }

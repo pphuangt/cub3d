@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pphuangt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:29:50 by pphuangt          #+#    #+#             */
-/*   Updated: 2025/05/05 13:29:52 by pphuangt         ###   ########.fr       */
+/*   Updated: 2025/06/07 09:51:28 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,7 @@ int main(int argc, char **argv)
     }
 
     // Call your parser here (textures, colors, etc.)
-    parse_texture(argv[1], &game);
-    parse_color_str(argv[1], &game);
-    convert_colors(&game);
+	parse_map_file(argv[1], &game);
 
     // Print the parsed data
     printf("NO texture path: %s\n", game.input.no_path);
@@ -92,7 +90,8 @@ int main(int argc, char **argv)
     printf("Ceiling color string: %s\n", game.input.c_color);
     printf("Floor color int: %d\n", game.input.f_color_int);
     printf("Ceiling color int: %d\n", game.input.c_color_int);
-
+	printf("row_count: %zu\n", game.input.row_count);
+	printf("col_count: %zu\n", game.input.col_count);
     // Free allocated memory
     free_input_memory(&game);
 

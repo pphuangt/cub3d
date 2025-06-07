@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_info.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hg <hg@student.42.fr>                      #+#  +:+       +#+        */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-06-03 05:52:10 by hg                #+#    #+#             */
-/*   Updated: 2025-06-03 05:52:10 by hg               ###   ########.fr       */
+/*   Created: 2025/06/03 05:52:10 by hg                #+#    #+#             */
+/*   Updated: 2025/06/07 10:06:18 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ int	line_nok(char *line, t_game *game)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != '0' && line[i] != '1' && line[i] != '2'
+		if (line[i] != '0' && line[i] != '1'
 			&& line[i] != 'N' && line[i] != 'S' && line[i] != 'W'
 			&& line[i] != 'E' && line[i] != ' ')
+		{
+			printf("Invalid character '%c' in map line\n", line[i]);
 			return (1);
+		}
 		i++;
 	}
 	if (i > game->input.col_count)
