@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 07:09:03 by hg                #+#    #+#             */
-/*   Updated: 2025/06/07 11:12:55 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/06/07 13:19:40 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,17 @@ static int	check_each_tiles_and_set_dir(t_game *game)
 		x = 0;
 		while (x < game->input.col_count)
 		{
+			if (game->input.map[x + (y * game->input.col_count)] == '0'
+				|| game->input.map[x + (y * game->input.col_count)] == 'N'
+				|| game->input.map[x + (y * game->input.col_count)] == 'S'
+				|| game->input.map[x + (y * game->input.col_count)] == 'W'
+				|| game->input.map[x + (y * game->input.col_count)] == 'E')
+				check_around_tiles(game, x, y);
 			if (game->input.map[x + (y * game->input.col_count)] == 'N'
 				|| game->input.map[x + (y * game->input.col_count)] == 'S'
 				|| game->input.map[x + (y * game->input.col_count)] == 'W'
 				|| game->input.map[x + (y * game->input.col_count)] == 'E')
 				set_start_pos(game, x, y);
-			else
-				check_around_tiles(game, x, y);
 			x++;
 		}
 		y++;

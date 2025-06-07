@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 07:24:36 by hg                #+#    #+#             */
-/*   Updated: 2025/06/07 11:45:29 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:44:21 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,19 @@ static char	*set_spaces(char *line, t_game *game)
 	return (line);
 }
 
+// static char	*remove_front_spaces(char *line)
+// {
+// 	size_t	len;
+
+// 	len = ft_strlen(line);
+// 	while (len > 0 && (line[len - 1] == ' ' || line[len - 1] == '\t'))
+// 	{
+// 		line[len - 1] = '\0';
+// 		len--;
+// 	}
+// 	return (line);
+// }
+
 static void	fill_map(char *filename, t_game *game)
 {
 	int		fd;
@@ -46,6 +59,7 @@ static void	fill_map(char *filename, t_game *game)
 		tmp = game->input.map;
 		if (ft_strlen(line) < game->input.col_count)
 			line = set_spaces(line, game);
+		// line = remove_front_spaces(line);
 		game->input.map = ft_strjoin(game->input.map, line);
 		check_malloc(game->input.map, game);
 		free(tmp);
