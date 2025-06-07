@@ -74,7 +74,11 @@ static int	check_each_tiles_and_set_dir(t_game *game)
 				|| game->input.map[x + (y * game->input.col_count)] == 'W'
 				|| game->input.map[x + (y * game->input.col_count)] == 'E')
 				set_start_pos(game, x, y);
-			else
+			else if (game->input.map[x + (y * game->input.col_count)] == '0'
+				|| game->input.map[x + (y * game->input.col_count)] == 'N'
+				|| game->input.map[x + (y * game->input.col_count)] == 'S'
+				|| game->input.map[x + (y * game->input.col_count)] == 'W'
+				|| game->input.map[x + (y * game->input.col_count)] == 'E')
 				check_around_tiles(game, x, y);
 			x++;
 		}
