@@ -18,6 +18,8 @@ void	setup_ray(t_game *game)
 {
 	static t_ray	static_rays[4096];
 
+	if (game->map.width >= 4096)
+		ft_error(game);
 	game->rays = static_rays;
 	game->dist_proj_plane = ((double)game->map.width / 2)
 		/ (tan(FOV_ANGLE / 2));
