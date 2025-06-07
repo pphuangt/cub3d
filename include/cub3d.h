@@ -33,7 +33,7 @@
 # define MOVE_SPEED 2.0
 # define ROTATE_SPEED 0.05
 # define FOV_ANGLE 1.0471975512
-# define TILE_SIZE 32
+# define TILE_SIZE 64
 # define PLAYER_WALL_GAP 8
 # define PLAYER_POINT 3
 # define TEXTURE_COUNT 4
@@ -93,8 +93,8 @@ typedef struct s_input
 	char		*ea_path;
 	char		*f_color;
 	char		*c_color;
-	int			f_color_int;
-	int			c_color_int;
+	int32_t		f_color_int;
+	int32_t		c_color_int;
 }	t_input;
 
 typedef struct s_game

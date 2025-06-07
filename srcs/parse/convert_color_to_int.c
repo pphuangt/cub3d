@@ -78,11 +78,11 @@ static int	check_rgb_format_and_value(char *color_str, t_game *game)
 	return (0);
 }
 
-static int	convert_color(char **c)
+static int32_t	convert_color(char **c)
 {
-	int	tmp;
+	int32_t	tmp;
 
-	tmp = (ft_atoi(c[0]) << 16) | (ft_atoi(c[1]) << 8) | ft_atoi(c[2]);
+	tmp = ft_pixel(ft_atoi(c[0]), ft_atoi(c[1]), ft_atoi(c[2]), 255);
 	free(c[0]);
 	free(c[1]);
 	free(c[2]);
