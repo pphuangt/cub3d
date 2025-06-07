@@ -16,7 +16,7 @@ static void		cast_ray(t_game *game, double ray_angle, int strip_id);
 
 void	setup_ray(t_game *game)
 {
-	static t_ray	static_rays[2048];
+	static t_ray	static_rays[4096];
 
 	game->rays = static_rays;
 	game->dist_proj_plane = ((double)game->map.width / 2)
