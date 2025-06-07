@@ -26,7 +26,6 @@ void	setup_map(t_game *game)
 	map->row = (int)input->row_count;
 	map->width = TILE_SIZE * map->col;
 	map->height = TILE_SIZE * map->row;
-	map_collision(map, 0, 0, 0);
 	map->textures[0] = mlx_load_png(input->no_path);
 	map->textures[1] = mlx_load_png(input->so_path);
 	map->textures[2] = mlx_load_png(input->we_path);
@@ -34,6 +33,7 @@ void	setup_map(t_game *game)
 	if (!map->textures[0] || !map->textures[1]
 		|| !map->textures[2] || !map->textures[3])
 		ft_error(game);
+	map_collision(map, 0, 0, 0);
 }
 
 void	render_map(t_game *game)
@@ -94,5 +94,5 @@ static bool	map_collision(t_map *map, double x, double y, int operation)
 		return (true);
 	index_x = floor(x / TILE_SIZE);
 	index_y = floor(y / TILE_SIZE);
-	return (map->wall[index_y * map->col + index_x] != '0');
+	return (static_map->wall[index_y * static_map->col + index_x] != '0');
 }

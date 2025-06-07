@@ -27,14 +27,8 @@ void	setup_player(t_game	*game)
 	player->move_direction = 0;
 	player->strafe_direction = 0;
 	player->turn_direction = 0;
-	player->rotation_angle = M_PI * 2 / 3;
-	if (input->pos_dirctn == 'S')
-		player->rotation_angle = PI_2;
-	if (input->pos_dirctn == 'W')
-		player->rotation_angle = PI;
-	if (input->pos_dirctn == 'E')
-		player->rotation_angle = 0;
-	player->move_speed = 60;
+	player->rotation_angle = PI_2;
+	player->move_speed = 100;
 	player->turn_speed = 60 * (M_PI / 180);
 }
 
