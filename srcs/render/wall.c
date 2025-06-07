@@ -26,7 +26,7 @@ void	render_wall(t_game *game)
 
 	map = &game->map;
 	render_ceil_floor(map->width, map->height,
-		game->input.f_color_int, game->input.f_color_int);
+		game->input.f_color_int, game->input.c_color_int);
 	render_projection_wall(game, map->width);
 }
 
@@ -95,6 +95,14 @@ static int32_t	texture_pixel_color(mlx_texture_t *texture,
 	uint32_t	pixel_index;
 	int32_t		color;
 
+	if (texture_offset_y < 0)
+		texture_offset_y = 0;
+	if (texture_offset_y >= (int)texture->height)
+		texture_offset_y = texture->height - 1;
+	if (texture_offset_x < 0)
+		texture_offset_x = 0;
+	if (texture_offset_x >= (int)texture->width)
+		texture_offset_x = texture->width - 1;
 	pixel_index = (texture_offset_y * texture->width + texture_offset_x) * 4;
 	color = ft_pixel(texture->pixels[pixel_index],
 			texture->pixels[pixel_index + 1],
