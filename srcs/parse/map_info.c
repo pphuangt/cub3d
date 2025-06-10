@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 14:35:55 by plesukja          #+#    #+#             */
-/*   Updated: 2025/06/07 14:35:57 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:38:51 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,22 @@ int	line_nok(char *line, t_game *game)
 	return (0);
 }
 
+static void	check_line(char *line, t_game *game, int fd)
+{
+	if (line_nok(line, game))
+	{
+		free(line);
+		line = get_next_line(fd);
+		while (line)
+		{
+			free(line);
+			line = get_next_line(fd);
+		}
+		close(fd);
+		free_and_exit(game, "Invalid map line");
+	}
+}
+
 void	get_map_info(char *filename, t_game *game)
 {
 	int		fd;
@@ -43,12 +59,7 @@ void	get_map_info(char *filename, t_game *game)
 		temp = line;
 		line = ft_strtrim(line, "\n");
 		free(temp);
-		if (line_nok(line, game))
-		{
-			close(fd);
-			free(line);
-			free_and_exit(game, "Invalid map line");
-		}
+		check_line(line, game, fd);
 		free(line);
 		game->input.row_count++;
 		line = get_next_line(fd);

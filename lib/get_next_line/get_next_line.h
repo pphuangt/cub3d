@@ -1,30 +1,36 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@42bangkok.com>          +#+  +:+       +#+        */
+/*   By: pphuangt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 00:47:21 by plesukja          #+#    #+#             */
-/*   Updated: 2024/04/09 12:14:34 by plesukja         ###   ########.fr       */
+/*   Created: 2023/09/25 12:45:53 by pphuangt          #+#    #+#             */
+/*   Updated: 2023/09/25 12:45:58 by pphuangt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-
-# include <unistd.h>
 # include <stdlib.h>
-# include <stddef.h>
+# include <unistd.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 4
+#  define BUFFER_SIZE 1000
 # endif
+# define DS 100
+# define DB 2
 
-void	*ft_gnl_calloc(size_t size, size_t count);
-int		ft_gnl_strlen(char *s);
-char	*ft_gnl_strjoin(const char *s1, const char *s2);
-char	*ft_gnl_strchr(const char *s, int c);
+# define BS BUFFER_SIZE
+
+typedef struct s_list
+{
+	char		*str;
+	ssize_t		length;
+	ssize_t		size;
+}	t_list;
+
 char	*get_next_line(int fd);
+void	free_t_list(t_list **src);
+void	*ft_memmove(void *dst, const void *src, size_t len);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@student.42.fr>           #+#  +:+       +#+       */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-05-20 08:03:57 by plesukja            #+#    #+#           */
-/*   Updated: 2025-05-20 08:03:57 by plesukja            ###   ########.fr    */
+/*   Created: 2025/05/20 08:03:57 by plesukja          #+#    #+#             */
+/*   Updated: 2025/06/10 10:33:42 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,12 @@ void	parse_map_file(char *filename, t_game *game)
 	open_map_file(filename, game);
 	check_map_filename(filename, game);
 	if (parse_texture(filename, game))
-		free_and_exit(game, "Error parsing textures\n");
+		free_and_exit(game, "Error parsing textures");
+	if (game->input.no_path == NULL || game->input.so_path == NULL
+		|| game->input.we_path == NULL || game->input.ea_path == NULL)
+		free_and_exit(game, "Missing texture paths");
 	if (parse_color_str(filename, game))
-		free_and_exit(game, "Error parsing colors\n");
+		free_and_exit(game, "Error parsing colors");
 	convert_colors(game);
 	get_map_info(filename, game);
 	allocate_map_memory(game);

@@ -3,71 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pphuangt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/26 00:50:56 by plesukja          #+#    #+#             */
-/*   Updated: 2024/03/28 11:59:21 by plesukja         ###   ########.fr       */
+/*   Created: 2023/09/25 12:45:09 by pphuangt          #+#    #+#             */
+/*   Updated: 2023/09/25 12:45:13 by pphuangt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_gnl_calloc(size_t size, size_t count)
+void	free_t_list(t_list **src)
 {
-	char	*tmp;
-	size_t	i;
+	free((*src)->str);
+	free(*src);
+	*src = NULL;
+}
 
-	if ((count > 0 && __SIZE_MAX__ / count < size) || size <= 0 || count <= 0)
-		return (NULL);
-	tmp = malloc(size * count);
-	if (!tmp)
-		return (NULL);
-	i = 0;
-	while (i < size * count)
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	unsigned char		*c_dst;
+	const unsigned char	*c_src;
+
+	c_dst = (unsigned char *) dst;
+	c_src = (const unsigned char *) src;
+	if (dst > src)
 	{
-		tmp[i] = '\0';
-		i++;
+		while (len > 0)
+		{
+			c_dst[len - 1] = c_src[len - 1];
+			len--;
+		}
 	}
-	return (tmp);
-}
-
-int	ft_gnl_strlen(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-char	*ft_gnl_strjoin(const char *s1, const char *s2)
-{
-	char	*result;
-	int		i;
-	int		result_len;
-
-	if (s1 == NULL && s2 == NULL)
-		return (NULL);
-	result_len = ft_gnl_strlen((char *)s1) + ft_gnl_strlen((char *)s2);
-	result = malloc (sizeof(char) * (result_len + 1));
-	if (!result)
-		return (NULL);
-	i = 0;
-	while (*s1)
-		result[i++] = *s1++;
-	while (*s2)
-		result[i++] = *s2++;
-	result[i] = '\0';
-	return (result);
-}
-
-char	*ft_gnl_strchr(const char *s, int c)
-{
-	while (*s && *s != c)
-		s++;
-	if (*s == c)
-		return ((char *)s);
-	else
-		return (NULL);
+	else if (dst < src)
+	{
+		while (len > 0)
+		{
+			*c_dst = *c_src;
+			c_dst++;
+			c_src++;
+			len--;
+		}
+	}
+	return (dst);
 }

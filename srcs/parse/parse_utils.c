@@ -6,7 +6,7 @@
 /*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 14:36:32 by plesukja          #+#    #+#             */
-/*   Updated: 2025/06/07 14:36:34 by plesukja         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:33:08 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,13 @@ void	free_and_exit(t_game *game, const char *msg)
 	if (msg)
 	{
 		ft_putstr_fd("ERROR\n", STDERR_FILENO);
-		perror(msg);
+		ft_putstr_fd((char *)msg, STDERR_FILENO);
+		if (errno)
+		{
+			ft_putstr_fd(": ", STDERR_FILENO);
+			ft_putstr_fd(strerror(errno), STDERR_FILENO);
+		}
+		ft_putstr_fd("\n", STDERR_FILENO);
 		status = EXIT_FAILURE;
 	}
 	free_input_memory(game);

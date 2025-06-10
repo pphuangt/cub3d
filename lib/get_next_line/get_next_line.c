@@ -3,119 +3,115 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pphuangt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 17:24:26 by plesukja          #+#    #+#             */
-/*   Updated: 2024/03/28 14:45:36 by plesukja         ###   ########.fr       */
+/*   Created: 2023/09/25 12:43:38 by pphuangt          #+#    #+#             */
+/*   Updated: 2023/09/25 12:44:04 by pphuangt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_gnl_strjoin_free(char *s1, char *s2);
-char	*ft_find_new_line(int fd, char *file_read);
-char	*ft_extract_line(char *file_read);
-char	*ft_get_remain(char *file_read);
+static t_list	*create_buff(void)
+{
+	t_list	*buff;
+
+	buff = (t_list *)malloc(sizeof(t_list));
+	if (!buff)
+		return (NULL);
+	buff->size = (BS < DS) * DS + (BS >= DS) * BS;
+	buff->str = malloc(sizeof(char) * buff->size);
+	if (!buff->str)
+	{
+		free(buff);
+		return (NULL);
+	}
+	buff->length = 0;
+	return (buff);
+}
+
+static int	expand_buff(t_list **buff)
+{
+	char	*n_str;
+
+	n_str = malloc(sizeof(char) * ((*buff)->size * DB));
+	if (!n_str)
+	{
+		free_t_list(buff);
+		return (0);
+	}
+	ft_memmove(n_str, (*buff)->str, (*buff)->length);
+	free((*buff)->str);
+	(*buff)->str = n_str;
+	(*buff)->size = (*buff)->size * DB;
+	return (1);
+}
+
+static char	*gen_line(t_list **buff, ssize_t i)
+{
+	char	*result;
+
+	result = malloc(sizeof(char) * (i + 1));
+	if (!result)
+	{
+		free_t_list(buff);
+		return (NULL);
+	}
+	result[i] = '\0';
+	ft_memmove(result, (*buff)->str, i);
+	ft_memmove((*buff)->str, (*buff)->str + i, (*buff)->length - i);
+	(*buff)->length = (*buff)->length - i;
+	if ((*buff)->length == 0)
+		free_t_list(buff);
+	return (result);
+}
+
+static char	*find_line(t_list **buff, int fd)
+{
+	ssize_t	size;
+	ssize_t	i;
+
+	i = 1;
+	while ((*buff)->str[i - 1] != '\n')
+	{
+		if (i == (*buff)->length)
+		{
+			if ((*buff)->size - (*buff)->length < BS && !expand_buff(buff))
+				return (NULL);
+			size = read(fd, (*buff)->str + (*buff)->length, BUFFER_SIZE);
+			(*buff)->length = (*buff)->length + size;
+			if (size < 0)
+			{
+				free_t_list(buff);
+				return (NULL);
+			}
+			else if (size == 0)
+				break ;
+		}
+		i++;
+	}
+	return (gen_line(buff, i));
+}
 
 char	*get_next_line(int fd)
 {
-	static char	*file_read;
-	char		*extract_line;
+	static t_list	*buff = NULL;
+	t_list			*tmp;
+	ssize_t			size;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	file_read = ft_find_new_line(fd, file_read);
-	if (!file_read)
-		return (NULL);
-	extract_line = ft_extract_line(file_read);
-	file_read = ft_get_remain(file_read);
-	return (extract_line);
-}
-
-char	*ft_gnl_strjoin_free(char *s1, char *s2)
-{
-	char	*tmp;
-
-	tmp = ft_gnl_strjoin(s1, s2);
-	free(s1);
-	return (tmp);
-}
-
-char	*ft_find_new_line(int fd, char *file_read)
-{
-	int		num_read;
-	char	*buffer;
-
-	if (!file_read)
-		file_read = ft_gnl_calloc(sizeof(char), 1);
-	buffer = ft_gnl_calloc(sizeof(char), BUFFER_SIZE + 1);
-	if (!buffer)
-		return (free(buffer), free(file_read), (NULL));
-	num_read = 1;
-	while (num_read > 0)
+	tmp = buff;
+	if (!buff)
 	{
-		num_read = read(fd, buffer, BUFFER_SIZE);
-		if (num_read == 0)
-			break ;
-		if (num_read == -1)
-			return (free(buffer), free(file_read), (NULL));
-		buffer[num_read] = '\0';
-		file_read = ft_gnl_strjoin_free(file_read, buffer);
-		if (ft_gnl_strchr(buffer, '\n'))
-			break ;
+		buff = create_buff();
+		if (!buff)
+			return (NULL);
+		size = read(fd, buff->str + buff->length, BUFFER_SIZE);
+		if ((size == 0 && !tmp) || size < 0)
+		{
+			free_t_list(&buff);
+			return (NULL);
+		}
+		buff->length = buff->length + size;
 	}
-	return (free(buffer), file_read);
-}
-
-char	*ft_extract_line(char *file_read)
-{
-	char	*result;
-	int		index;
-
-	index = 0;
-	if (!file_read[index])
-		return (NULL);
-	while (file_read[index] && file_read[index] != '\n')
-		index++;
-	result = ft_gnl_calloc(sizeof(char), index + 2);
-	if (!result)
-		return (NULL);
-	index = 0;
-	while (file_read[index] && file_read[index] != '\n')
-	{
-		result[index] = file_read[index];
-		index++;
-	}
-	if (file_read[index] && file_read[index] == '\n')
-	{
-		result[index] = file_read[index];
-		index++;
-	}
-	return (result);
-}
-
-char	*ft_get_remain(char *file_read)
-{
-	int		index;
-	int		result_index;
-	char	*result;
-
-	index = 0;
-	while (file_read[index] && file_read[index] != '\n')
-		index++;
-	if (!file_read[index])
-		return (free(file_read), (NULL));
-	result = ft_gnl_calloc(sizeof(char), ft_gnl_strlen(file_read) - index + 1);
-	if (!result)
-		return (free(file_read), (NULL));
-	index++;
-	result_index = 0;
-	while (file_read[index])
-	{
-		result[result_index] = file_read[index];
-		result_index++;
-		index++;
-	}
-	free(file_read);
-	return (result);
+	return (find_line(&buff, fd));
 }
