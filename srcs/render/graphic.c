@@ -34,4 +34,8 @@ void	terminate(t_game *game)
 {
 	mlx_close_window(game->graphic.window);
 	free_input_memory(game);
+	mlx_delete_texture(game->map.textures[NORTH]);
+	mlx_delete_texture(game->map.textures[SOUTH]);
+	mlx_delete_texture(game->map.textures[WEST]);
+	mlx_delete_texture(game->map.textures[EAST]);
 }
