@@ -162,7 +162,7 @@ int		parse_color_str(char *filename, t_game *game);
 void	convert_colors(t_game *game);
 void	get_map_info(char *filename, t_game *game);
 void	load_and_validate_map(char *filename, t_game *game);
-void    check_map(t_game *game);
+void	check_map(t_game *game);
 void	check_udr(t_game *game, int x, int y);
 void	check_udl(t_game *game, int x, int y);
 void	check_udlr(t_game *game, int x, int y);
