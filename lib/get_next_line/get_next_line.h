@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pphuangt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:45:53 by pphuangt          #+#    #+#             */
-/*   Updated: 2023/09/25 12:45:58 by pphuangt         ###   ########.fr       */
+/*   Updated: 2025/06/10 11:08:00 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@
 
 # define BS BUFFER_SIZE
 
-typedef struct s_list
+typedef struct s_gnl_list
 {
 	char		*str;
 	ssize_t		length;
 	ssize_t		size;
-}	t_list;
+}	t_gnl_list;
 
 char	*get_next_line(int fd);
-void	free_t_list(t_list **src);
-void	*ft_memmove(void *dst, const void *src, size_t len);
+void	free_t_list(t_gnl_list **src);
+void	*ft_gnl_memmove(void *dst, const void *src, size_t len);
 
 #endif

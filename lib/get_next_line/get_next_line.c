@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pphuangt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: plesukja <plesukja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:43:38 by pphuangt          #+#    #+#             */
-/*   Updated: 2023/09/25 12:44:04 by pphuangt         ###   ########.fr       */
+/*   Updated: 2025/06/10 11:09:47 by plesukja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static t_list	*create_buff(void)
+static t_gnl_list	*create_buff(void)
 {
-	t_list	*buff;
+	t_gnl_list	*buff;
 
-	buff = (t_list *)malloc(sizeof(t_list));
+	buff = (t_gnl_list *)malloc(sizeof(t_gnl_list));
 	if (!buff)
 		return (NULL);
 	buff->size = (BS < DS) * DS + (BS >= DS) * BS;
@@ -30,7 +30,7 @@ static t_list	*create_buff(void)
 	return (buff);
 }
 
-static int	expand_buff(t_list **buff)
+static int	expand_buff(t_gnl_list **buff)
 {
 	char	*n_str;
 
@@ -40,14 +40,14 @@ static int	expand_buff(t_list **buff)
 		free_t_list(buff);
 		return (0);
 	}
-	ft_memmove(n_str, (*buff)->str, (*buff)->length);
+	ft_gnl_memmove(n_str, (*buff)->str, (*buff)->length);
 	free((*buff)->str);
 	(*buff)->str = n_str;
 	(*buff)->size = (*buff)->size * DB;
 	return (1);
 }
 
-static char	*gen_line(t_list **buff, ssize_t i)
+static char	*gen_line(t_gnl_list **buff, ssize_t i)
 {
 	char	*result;
 
@@ -58,15 +58,15 @@ static char	*gen_line(t_list **buff, ssize_t i)
 		return (NULL);
 	}
 	result[i] = '\0';
-	ft_memmove(result, (*buff)->str, i);
-	ft_memmove((*buff)->str, (*buff)->str + i, (*buff)->length - i);
+	ft_gnl_memmove(result, (*buff)->str, i);
+	ft_gnl_memmove((*buff)->str, (*buff)->str + i, (*buff)->length - i);
 	(*buff)->length = (*buff)->length - i;
 	if ((*buff)->length == 0)
 		free_t_list(buff);
 	return (result);
 }
 
-static char	*find_line(t_list **buff, int fd)
+static char	*find_line(t_gnl_list **buff, int fd)
 {
 	ssize_t	size;
 	ssize_t	i;
@@ -95,9 +95,9 @@ static char	*find_line(t_list **buff, int fd)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*buff = NULL;
-	t_list			*tmp;
-	ssize_t			size;
+	static t_gnl_list	*buff = NULL;
+	t_gnl_list			*tmp;
+	ssize_t				size;
 
 	tmp = buff;
 	if (!buff)

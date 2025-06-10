@@ -6,9 +6,10 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIBMLX = ./$(LIB)/MLX42
 LIBFT = ./$(LIB)/libft
+GNL = ./$(LIB)/get_next_line
 
-HEADERS = -I./$(INCLUDE) -I$(LIBMLX)/$(INCLUDE) -I$(LIBFT)
-LIBS = $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L$(LIBMLX)
+HEADERS = -I./$(INCLUDE) -I$(LIBMLX)/$(INCLUDE) -I$(LIBFT) -I$(GNL)
+LIBS = $(LIBFT)/libft.a $(GNL)/get_next_line.a $(LIBMLX)/build/libmlx42.a -L$(LIBMLX)
 
 SRCS_DIR = ./srcs
 RENDER_DIR = $(SRCS_DIR)/render
@@ -36,6 +37,7 @@ libmlx:
 
 $(NAME) : $(OBJS)
 	$(MAKE) -C $(LIBFT)
+	$(MAKE) -C $(GNL)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) $(OS_FLAGS) $(HEADERS)
 
 %.o: %.c
@@ -43,12 +45,15 @@ $(NAME) : $(OBJS)
 
 clean:
 	$(MAKE) clean -C $(LIBFT)
+	$(MAKE) clean -C $(GNL)
 	@rm -rf $(OBJS)
 
 fclean:
 	$(MAKE) clean -C $(LIBFT)
+	$(MAKE) clean -C $(GNL)
 	@rm -rf $(OBJS)
 	@rm -f $(LIBFT)/libft.a
+	@rm -f $(GNL)/get_next_line.a
 	@rm -rf $(LIBMLX)/build
 	@rm -f $(NAME)
 
